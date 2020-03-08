@@ -12,7 +12,7 @@
 		<div class="collapse navbar-collapse" id="myNavbar">
 			<ul class="nav navbar-nav">
 				<li><a href="/">Home</a></li>
-				<li><a href="/user/list" th:text="#{listUser.message}">Lista de usuarios</a></li>
+				<li id="users-menu"><a href="/user/list" th:text="#{listUser.message}">Lista de usuarios</a></li>
 				<li id="friends-menu" class="dropdown"><a class="dropdown-toggle"
 					data-toggle="dropdown" href="#" th:text="#{friends.message}">Amigos<span class="caret"></span>
 				</a>
@@ -30,19 +30,19 @@
 						<li><a id="btnEnglish" value="EN"> <img
 								th:src="@{/img/if_uk_flag.png}"
 								style="border: 0; float: left; margin-right: 15px" /> 
-								<span th:text="#{language.en}">Inglés</span>
+								<span th:text="#{language.en}">Ingles</span>
 						</a></li>
 						<li><a id="btnSpanish" value="ES"> <img
 								th:src="@{/img/if_spain_flag.png}"
 								style="border: 0; float: left; margin-right: 15px" /> 
-								<span th:text="#{language.es}">Español</span>
+								<span th:text="#{language.es}">Espa�ol</span>
 						</a></li>
 					</ul></li>
 				<li><a href="/signup" th:text="#{signup.message}"> <span
 						class="glyphicon glyphicon-user"></span> Registrate
 				</a></li>
 				<li><a href="/login" th:text="#{login.message}"> <span
-						class="glyphicon glyphicon-log-in"></span> Identifícate
+						class="glyphicon glyphicon-log-in"></span> Identificate
 				</a></li>
 
 				<li><a href="/logout" th:text="#{logout.message}"> <span

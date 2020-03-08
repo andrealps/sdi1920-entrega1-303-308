@@ -3,6 +3,9 @@ package com.uniovi.services;
 import java.util.*;
 import javax.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import com.uniovi.entities.User;
@@ -21,7 +24,7 @@ public class UsersService {
 	public void init() {
 	}
 
-	public List<User> getUsers() {
+	public List<User> getUsers(User user) {
 		List<User> users = new ArrayList<User>();
 		usersRepository.findAll().forEach(users::add);
 		return users;
@@ -43,9 +46,18 @@ public class UsersService {
 	public void deleteUser(Long id) {
 		usersRepository.deleteById(id);
 	}
-	
-	public List<User> searchByNameAndLastName(String searchText) {
-		searchText = "%"+searchText+"%";
-		return usersRepository.searchByNameAndLastName(searchText);
+
+	public Page<User> searchUserByNameLastNameAndEmail(Pageable pageable, String searchText) {
+		Page<User> users = new PageImpl<User>(new LinkedList<User>());
+		searchText = "%" + searchText + "%";
+		users = usersRepository.searchByNameLastNameAndEmail(pageable, searchText);
+		return users;
 	}
+
+	// TODO que no se muestren ni los administradores ni el usuario autenticado
+	public Page<User> findUsers(Pageable pageable) {
+		Page<User> users = usersRepository.findAll(pageable);
+		return users;
+	}
+
 }
