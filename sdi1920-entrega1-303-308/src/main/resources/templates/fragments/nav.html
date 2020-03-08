@@ -12,40 +12,40 @@
 		<div class="collapse navbar-collapse" id="myNavbar">
 			<ul class="nav navbar-nav">
 				<li><a href="/">Home</a></li>
-				<li><a href="/user/list">Listado de usuarios</a></li>
-				<li id="marks-menu" class="dropdown"><a class="dropdown-toggle"
-					data-toggle="dropdown" href="#">Amigos<span class="caret"></span>
+				<li><a href="/user/list" th:text="#{listUser.message}">Lista de usuarios</a></li>
+				<li id="friends-menu" class="dropdown"><a class="dropdown-toggle"
+					data-toggle="dropdown" href="#" th:text="#{friends.message}">Amigos<span class="caret"></span>
 				</a>
 					<ul class="dropdown-menu">
-						<li><a href="/user/friends/list">Mis amigos</a></li>
-						<li><a href="/user/friends/request">Solicitudes de amistad</a></li>
+						<li><a href="/user/friends/list" th:text="#{friendsList.message}">Mis amigos</a></li>
+						<li><a href="/user/friends/request" th:text="#{friendsRequest.message}">Solicitudes de amistad</a></li>
 					</ul></li>
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
-				<li class="dropdown"><a id="btnLanguage" href="
-			 #"
-					class="dropdown-toggle" data-toggle="dropdown" role="button"
-					aria-haspopup="true" aria-expanded="false"> <span>Cambiar
-							idioma</span> <span class="caret"></span>
+				<li class="dropdown"><a id="btnLanguage" href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+					aria-haspopup="true" aria-expanded="false"> 
+					<span th:text="#{language.change}"></span> <span class="caret"></span>
 				</a>
 					<ul id="languageDropdownMenuButton" class="dropdown-menu">
 						<li><a id="btnEnglish" value="EN"> <img
 								th:src="@{/img/if_uk_flag.png}"
-								style="border: 0; float: left; margin-right: 15px" /> <span>Inglés</span>
+								style="border: 0; float: left; margin-right: 15px" /> 
+								<span th:text="#{language.en}">Inglés</span>
 						</a></li>
 						<li><a id="btnSpanish" value="ES"> <img
 								th:src="@{/img/if_spain_flag.png}"
-								style="border: 0; float: left; margin-right: 15px" /> <span>Español</span>
+								style="border: 0; float: left; margin-right: 15px" /> 
+								<span th:text="#{language.es}">Español</span>
 						</a></li>
 					</ul></li>
-				<li><a href="/signup"> <span
+				<li><a href="/signup" th:text="#{signup.message}"> <span
 						class="glyphicon glyphicon-user"></span> Registrate
 				</a></li>
-				<li><a href="/login"> <span
+				<li><a href="/login" th:text="#{login.message}"> <span
 						class="glyphicon glyphicon-log-in"></span> Identifícate
 				</a></li>
 
-				<li><a href="/logout"> <span
+				<li><a href="/logout" th:text="#{logout.message}"> <span
 						class="glyphicon glyphicon-log-out"></span> Desconectar
 				</a></li>
 			</ul>
