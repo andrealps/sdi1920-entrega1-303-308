@@ -78,7 +78,7 @@ public class RegistroTest {
 		PO_HomeView.clickOption(driver, "signup", "class", "btn btn-primary");
 		// Rellenamos el formulario.
 		PO_RegisterView.fillForm(driver, "", "", "", "77777", "77777");
-		// Comprobamos que seguimos en login
+		// Comprobamos que seguimos en el registro
 		PO_RegisterView.checkKey(driver, "signup.message", PO_Properties.getSPANISH());
 	}
 	

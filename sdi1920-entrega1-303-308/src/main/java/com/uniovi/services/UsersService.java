@@ -42,6 +42,10 @@ public class UsersService {
 	public User getUserByEmail(String email) {
 		return usersRepository.findByEmail(email);
 	}
+	
+	public User getUserByEmailAndPassword(String email, String password) {
+		return usersRepository.findByEmailAndPassword(email, password);
+	}
 
 	public void deleteUser(Long id) {
 		usersRepository.deleteById(id);

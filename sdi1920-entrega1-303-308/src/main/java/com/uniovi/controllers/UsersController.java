@@ -7,8 +7,6 @@ import org.springframework.beans.factory.annotation.*;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -33,6 +31,7 @@ public class UsersController {
 
 	@Autowired
 	private SignUpFormValidator signUpFormValidator;
+
 
 	@RequestMapping(value = "/signup", method = RequestMethod.GET)
 	public String signup(Model model) {
@@ -59,9 +58,9 @@ public class UsersController {
 
 	@RequestMapping(value = { "/home" }, method = RequestMethod.GET)
 	public String home(Model model) {
-		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-		String email = auth.getName();
-		User activeUser = usersService.getUserByEmail(email);
+//		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+//		String email = auth.getName();
+//		User activeUser = usersService.getUserByEmail(email);
 		return "home";
 	}
 

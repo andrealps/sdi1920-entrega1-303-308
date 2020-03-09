@@ -14,4 +14,7 @@ public interface UsersRepository extends CrudRepository<User, Long>{
 	Page<User> searchByNameLastNameAndEmail(Pageable pageable, String searchText);
 	
 	Page<User> findAll(Pageable pageable);
+
+	@Query("SELECT r FROM User r WHERE (r.email = ?1 AND r.password = ?2)")
+	User findByEmailAndPassword(String email, String password);
 }
