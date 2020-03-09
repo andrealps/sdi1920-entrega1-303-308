@@ -29,7 +29,7 @@ public class PO_PrivateView extends PO_NavView {
 		driver.findElement(boton).click();
 	}
 
-	static public void login(WebDriver driver, String email, String pass, String text) {
+	static public void login(WebDriver driver, String email, String pass) {
 
 		// Vamos al formulario de logueo.
 		PO_HomeView.clickOption(driver, "login", "class", "btn btn-primary");
@@ -37,7 +37,7 @@ public class PO_PrivateView extends PO_NavView {
 		PO_LoginView.fillForm(driver, email, pass);
 		// Comprobamos que entramos a la vista que “lista todos los usuarios de la
 		// aplicación”
-		PO_View.checkElement(driver, "text", text);
+		PO_RegisterView.checkKey(driver, "welcome.message", PO_Properties.getSPANISH());
 	}
 
 	

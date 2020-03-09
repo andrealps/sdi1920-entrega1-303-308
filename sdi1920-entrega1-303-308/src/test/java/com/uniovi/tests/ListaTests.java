@@ -15,13 +15,14 @@ import com.uniovi.tests.pageobjects.PO_HomeView;
 import com.uniovi.tests.pageobjects.PO_LoginView;
 import com.uniovi.tests.pageobjects.PO_PrivateView;
 import com.uniovi.tests.pageobjects.PO_Properties;
+import com.uniovi.tests.pageobjects.PO_RegisterView;
 import com.uniovi.tests.pageobjects.PO_View;
 import com.uniovi.tests.util.SeleniumUtils;
 
 //Ordenamos las pruebas por el nombre del método 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 
-public class NotaneitorTests {
+public class ListaTests {
 
 	// En Windows (Debe ser la versión 65.0.1 y desactivar las actualizaciones
 	// automáticas)):
@@ -64,10 +65,10 @@ public class NotaneitorTests {
 	// Al finalizar la última prueba
 	@AfterClass
 	static public void end() {
-		// Cerramos el navegador al finalizar las pruebas driver.quit();
+		// Cerramos el navegador al finalizar las pruebas 
+		driver.quit();
 	}
 
-	// Al finalizar la última prueba @AfterClass static public void end() {
 	@Test
 	public void test() {
 		fail("Not yet implemented");
@@ -76,11 +77,10 @@ public class NotaneitorTests {
 	// [Prueba12]
 	// Hacer una búsqueda con el campo vacío y comprobar que se muestra la página
 	// que corresponde con el listado usuarios existentes en el sistema.
-	// TODO que al hacer sesion vaya a la lista de usuarios
 	@Test
 	public void PR12() {
 		// Nos logueamos
-		PO_PrivateView.login(driver, "ejemplo1@gmail.com", "123456", "Bienvenido al chat");
+		PO_PrivateView.login(driver, "ejemplo1@gmail.com", "123456");
 		// Vamos a lista de usuarios li[contains(@id, 'users-menu')]/a
 		List<WebElement> elementos = PO_View.checkElement(driver, "free", "//li[contains(@id, 'users-menu')]/a");
 		elementos.get(0).click();
@@ -93,8 +93,7 @@ public class NotaneitorTests {
 		driver.findElement(boton).click();
 		// Se cargan todos los usuarios
 		elementos = SeleniumUtils.EsperaCargaPagina(driver, "free", "//tbody/tr", PO_View.getTimeout());
-		assertTrue(elementos.size() == 3);
-
+		assertTrue(elementos.size() == 5);
 	}
 
 	// [Prueba13]
@@ -104,7 +103,7 @@ public class NotaneitorTests {
 	@Test
 	public void PR13() {
 		// Nos logueamos
-		PO_PrivateView.login(driver, "ejemplo1@gmail.com", "123456", "Bienvenido al chat");
+		PO_PrivateView.login(driver, "ejemplo1@gmail.com", "123456");
 		// Vamos a lista de usuarios li[contains(@id, 'users-menu')]/a
 		List<WebElement> elementos = PO_View.checkElement(driver, "free", "//li[contains(@id, 'users-menu')]/a");
 		elementos.get(0).click();
@@ -117,6 +116,8 @@ public class NotaneitorTests {
 		driver.findElement(boton).click();
 		// Y esperamos a que NO aparezca nada
 		SeleniumUtils.EsperaCargaPaginaNoTexto(driver, "@gmail.com", PO_View.getTimeout());
+		// Nos desconectamos
+		PO_HomeView.clickOption(driver, "logout", "text", "Identifícate");
 	}
 
 	// [Prueba14]
@@ -127,7 +128,7 @@ public class NotaneitorTests {
 	@Test
 	public void PR14() {
 		// Nos logueamos
-		PO_PrivateView.login(driver, "ejemplo1@gmail.com", "123456", "Bienvenido al chat");
+		PO_PrivateView.login(driver, "ejemplo1@gmail.com", "123456");
 		// Vamos a lista de usuarios li[contains(@id, 'users-menu')]/a
 		List<WebElement> elementos = PO_View.checkElement(driver, "free", "//li[contains(@id, 'users-menu')]/a");
 		elementos.get(0).click();
@@ -140,5 +141,7 @@ public class NotaneitorTests {
 		driver.findElement(boton).click();
 		// Comprobamos que aparece el usuario que corresponde
 		elementos = PO_View.checkElement(driver, "text", "ejemplo2@gmail.com");
+		// Nos desconectamos
+		PO_HomeView.clickOption(driver, "logout", "text", "Identifícate");
 	}
 }

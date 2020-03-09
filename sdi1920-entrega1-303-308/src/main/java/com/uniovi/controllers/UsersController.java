@@ -68,12 +68,15 @@ public class UsersController {
 	public String getListado(Model model, Pageable pageable, Principal principal,
 			@RequestParam(value = "", required = false) String searchText) {
 
+		String email = principal.getName();
+		User activeUser = usersService.getUserByEmail(email);
+		
 		Page<User> users = new PageImpl<User>(new LinkedList<User>());
 		
 		if (searchText != null && !searchText.isEmpty()) {
 			users = usersService.searchUserByNameLastNameAndEmail(pageable, searchText);
 		} else {
-			users = usersService.findUsers(pageable);
+			users = usersService.findUsers(pageable, activeUser);
 		}
 
 		model.addAttribute("usersList", users.getContent());
