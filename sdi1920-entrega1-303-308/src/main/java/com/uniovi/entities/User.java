@@ -14,7 +14,7 @@ public class User {
 	private String email;
 	private String name;
 	private String lastName;
-//	private String role;
+	private String role;
 
 	private String password;
 	@Transient // propiedad que no se almacena en la tabla.
@@ -63,13 +63,13 @@ public class User {
 		this.lastName = lastName;
 	}
 
-//	public String getRole() {
-//		return role;
-//	}
-//
-//	public void setRole(String role) {
-//		this.role = role;
-//	}
+	public String getRole() {
+		return role;
+	}
+
+	public void setRole(String role) {
+		this.role = role;
+	}
 
 	public String getPassword() {
 		return password;
