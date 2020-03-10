@@ -3,7 +3,7 @@ package com.uniovi.entities;
 import javax.persistence.*;
 import java.util.Set; //A collection that contains no duplicate elements
 
-@Entity 
+@Entity
 @Table(name = "user")
 public class User {
 	@Id
@@ -20,7 +20,9 @@ public class User {
 	@Transient // propiedad que no se almacena en la tabla.
 	private String passwordConfirm;
 
-	
+	@Transient
+	private boolean friendRequestSended;
+
 	public User(String email, String name, String lastName) {
 		super();
 		this.email = email;
@@ -86,6 +88,13 @@ public class User {
 	public void setPasswordConfirm(String passwordConfirm) {
 		this.passwordConfirm = passwordConfirm;
 	}
-	
-	
+
+	public boolean isFriendRequestSended() {
+		return friendRequestSended;
+	}
+
+	public void setFriendRequestSended(boolean friendRequestSended) {
+		this.friendRequestSended = friendRequestSended;
+	}
+
 }

@@ -22,13 +22,16 @@
 						<th>Nombre</th>
 						<th>Email</th>
 						<th class="col-md-1"></th>
-						<th class="col-md-1"></th>
 					</tr>
 				</thead>
 				<tbody>
 					<tr th:each="user : ${usersList}">
 						<td th:text="${user.name}">Nombre</td>
 						<td th:text="${user.email}">Email</td>
+						<td><a th:href="${'/friend/add/' + user.email}"> <span
+								th:if="${user.friendRequestSended}"></span> <span
+								th:unless="${user.friendRequestSended}">Agregar amigo</span>
+						</a></td>
 					</tr>
 				</tbody>
 			</table>
