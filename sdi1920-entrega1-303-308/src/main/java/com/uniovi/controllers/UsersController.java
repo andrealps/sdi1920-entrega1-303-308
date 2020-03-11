@@ -73,7 +73,7 @@ public class UsersController {
 		return "home";
 	}
 
-	@RequestMapping("/user/list")
+	@RequestMapping("/user/listUsers")
 	public String getListado(Model model, Pageable pageable, Principal principal,
 			@RequestParam(value = "", required = false) String searchText) {
 
@@ -92,9 +92,10 @@ public class UsersController {
 
 		model.addAttribute("usersList", users.getContent());
 		model.addAttribute("page", users);
-		return "user/list";
+		return "user/listUsers";
 	}
-
+	
+	// Para ver a que usuario le puedes mandar solicitud
 	private Page<User> compareLists(List<User> users, User user) {
 		List<Long> friendLongs = friendRequestService.findFriendRequestByUser(user);
 		List<User> friendRequest = new ArrayList<User>();
@@ -108,11 +109,6 @@ public class UsersController {
 			}
 		}
 		return new PageImpl<User>(users);
-	}
-
-	@RequestMapping("/user/details/{id}")
-	public String getDetail(@PathVariable Long id) {
-		return "ok";
 	}
 
 }

@@ -19,9 +19,17 @@ public class FriendRequestService {
 		friendRequestRepository.save(new FriendRequest(userFrom.getId(), userTo.getId()));
 	}
 	
+	// Peticiones que envio un usuario
 	public List<Long> findFriendRequestByUser(User user) {
 		return friendRequestRepository.findFriendRequestByUser(user.getId());
 	}
+	
+	// Peticiones que recibio un usuario
+	public List<Long> findFriendRequestToUser(User user) {
+		return friendRequestRepository.findFriendRequestToUser(user.getId());
+	}
+	
+	
 
 	
 

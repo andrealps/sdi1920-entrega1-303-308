@@ -1,10 +1,16 @@
 package com.uniovi.tests;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 
 import java.util.List;
 
-import org.junit.*;
+import org.junit.After;
+import org.junit.AfterClass;
+import org.junit.Before;
+import org.junit.BeforeClass;
+import org.junit.FixMethodOrder;
+import org.junit.Test;
 import org.junit.runners.MethodSorters;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -12,17 +18,14 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
 import com.uniovi.tests.pageobjects.PO_HomeView;
-import com.uniovi.tests.pageobjects.PO_LoginView;
 import com.uniovi.tests.pageobjects.PO_PrivateView;
-import com.uniovi.tests.pageobjects.PO_Properties;
-import com.uniovi.tests.pageobjects.PO_RegisterView;
 import com.uniovi.tests.pageobjects.PO_View;
 import com.uniovi.tests.util.SeleniumUtils;
 
 //Ordenamos las pruebas por el nombre del método 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 
-public class ListaTests {
+public class ListaUsuariosTest {
 
 	// En Windows (Debe ser la versión 65.0.1 y desactivar las actualizaciones
 	// automáticas)):
@@ -94,6 +97,8 @@ public class ListaTests {
 		// Se cargan todos los usuarios
 		elementos = SeleniumUtils.EsperaCargaPagina(driver, "free", "//tbody/tr", PO_View.getTimeout());
 		assertTrue(elementos.size() == 5);
+		// Nos desconectamos
+		PO_HomeView.clickOption(driver, "logout", "text", "Email");
 	}
 
 	// [Prueba13]
@@ -117,7 +122,7 @@ public class ListaTests {
 		// Y esperamos a que NO aparezca nada
 		SeleniumUtils.EsperaCargaPaginaNoTexto(driver, "@gmail.com", PO_View.getTimeout());
 		// Nos desconectamos
-		PO_HomeView.clickOption(driver, "logout", "text", "Identifícate");
+		PO_HomeView.clickOption(driver, "logout", "text", "Email");
 	}
 
 	// [Prueba14]
@@ -142,6 +147,6 @@ public class ListaTests {
 		// Comprobamos que aparece el usuario que corresponde
 		elementos = PO_View.checkElement(driver, "text", "ejemplo2@gmail.com");
 		// Nos desconectamos
-		PO_HomeView.clickOption(driver, "logout", "text", "Identifícate");
+		PO_HomeView.clickOption(driver, "logout", "text", "Email");
 	}
 }

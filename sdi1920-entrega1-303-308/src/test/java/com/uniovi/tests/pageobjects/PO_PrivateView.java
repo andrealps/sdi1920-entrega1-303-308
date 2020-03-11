@@ -40,5 +40,33 @@ public class PO_PrivateView extends PO_NavView {
 		PO_RegisterView.checkKey(driver, "welcome.message", PO_Properties.getSPANISH());
 	}
 
-	
+	public static void enviarPeticiones(WebDriver driver) {
+		login(driver, "ejemplo1@gmail.com", "123456");
+		enviarPeticion(driver);
+		PO_HomeView.clickOption(driver, "logout", "text", "Email");
+
+		login(driver, "ejemplo3@gmail.com", "123456");
+		enviarPeticion(driver);
+		PO_HomeView.clickOption(driver, "logout", "text", "Email");
+
+		login(driver, "ejemplo4@gmail.com", "123456");
+		enviarPeticion(driver);
+		PO_HomeView.clickOption(driver, "logout", "text", "Email");
+
+		login(driver, "ejemplo5@gmail.com", "123456");
+		enviarPeticion(driver);
+		PO_HomeView.clickOption(driver, "logout", "text", "Email");
+
+	}
+
+	private static void enviarPeticion(WebDriver driver) {
+		// Vamos a enviar peticion
+		List<WebElement> elementos = PO_View.checkElement(driver, "free", "//li[contains(@id, 'users-menu')]/a");
+		elementos.get(0).click();
+		// Enviamos peticion
+		elementos = PO_View.checkElement(driver, "free",
+				"//td[contains(text(), 'Lucas')]/following-sibling::*/a[contains(@href, 'friend/add')]");
+		elementos.get(0).click();
+	}
+
 }
