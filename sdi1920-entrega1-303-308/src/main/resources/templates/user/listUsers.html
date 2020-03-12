@@ -30,7 +30,7 @@
 						<td th:text="${user.email}">Email</td>
 						<td><a th:href="${'/friend/add/' + user.email}"> <span
 								th:if="${user.friendRequestSended}"></span> <span
-								th:unless="${user.friendRequestSended}">Agregar amigo</span>
+								th:unless="${user.friendRequestSended}">Agregar</span>
 						</a></td>
 					</tr>
 				</tbody>

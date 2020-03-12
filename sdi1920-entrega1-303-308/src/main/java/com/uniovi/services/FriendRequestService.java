@@ -29,6 +29,13 @@ public class FriendRequestService {
 		return friendRequestRepository.findFriendRequestToUser(user.getId());
 	}
 	
+	// Aceptar peticion (ser borra la peticion de la bd)
+	public List<Long> acceptFriendRequest( User userFrom, User userTo) {
+		FriendRequest request = friendRequestRepository.acceptFriendRequest(userFrom.getId(), userTo.getId());
+		friendRequestRepository.delete(request);
+		return friendRequestRepository.findFriendRequestByUser(userTo.getId());
+	}
+	
 	
 
 	

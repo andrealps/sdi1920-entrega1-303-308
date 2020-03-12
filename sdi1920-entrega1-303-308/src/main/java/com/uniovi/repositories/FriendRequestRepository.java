@@ -14,5 +14,8 @@ public interface FriendRequestRepository extends CrudRepository<FriendRequest, L
 	
 	@Query("SELECT fr.userFrom FROM FriendRequest fr WHERE fr.userTo = ?1")
 	List<Long> findFriendRequestToUser(Long idUser);
+
+	@Query("SELECT fr FROM FriendRequest fr WHERE (fr.userFrom = ?1 AND fr.userTo = ?2)")
+	FriendRequest acceptFriendRequest(Long idUserFrom, Long idUserTo);
 }
 

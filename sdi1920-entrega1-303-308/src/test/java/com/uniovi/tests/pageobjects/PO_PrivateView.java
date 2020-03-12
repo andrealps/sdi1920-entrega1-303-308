@@ -41,19 +41,16 @@ public class PO_PrivateView extends PO_NavView {
 	}
 
 	public static void enviarPeticiones(WebDriver driver) {
-		login(driver, "ejemplo1@gmail.com", "123456");
-		enviarPeticion(driver);
-		PO_HomeView.clickOption(driver, "logout", "text", "Email");
-
-		login(driver, "ejemplo3@gmail.com", "123456");
-		enviarPeticion(driver);
-		PO_HomeView.clickOption(driver, "logout", "text", "Email");
 
 		login(driver, "ejemplo4@gmail.com", "123456");
 		enviarPeticion(driver);
 		PO_HomeView.clickOption(driver, "logout", "text", "Email");
 
 		login(driver, "ejemplo5@gmail.com", "123456");
+		enviarPeticion(driver);
+		PO_HomeView.clickOption(driver, "logout", "text", "Email");
+		
+		login(driver, "ejemplo6@gmail.com", "123456");
 		enviarPeticion(driver);
 		PO_HomeView.clickOption(driver, "logout", "text", "Email");
 
@@ -65,7 +62,7 @@ public class PO_PrivateView extends PO_NavView {
 		elementos.get(0).click();
 		// Enviamos peticion
 		elementos = PO_View.checkElement(driver, "free",
-				"//td[contains(text(), 'Lucas')]/following-sibling::*/a[contains(@href, 'friend/add')]");
+				"//td[contains(text(), 'María')]/following-sibling::*/a[contains(@href, 'friend/add')]");
 		elementos.get(0).click();
 	}
 

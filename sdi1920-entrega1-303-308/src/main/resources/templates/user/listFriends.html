@@ -4,23 +4,23 @@
 <body>
 	<!-- Barra de Navegación superior -->
 	<nav th:replace="fragments/nav" />
-
+	
 	<div class="container">
-		<h2>Solicitudes de amistad</h2>
-		<p>Tienes las siguientes solicitudes de amistad:</p>
+		<h2>Amigos</h2>
 		<div class="table-responsive">
 			<table class="table table-hover">
 				<thead>
 					<tr>
-						<th>Usuario</th>
-						<th class="col-md-1"></th>
+						<th>Nombre</th>
+						<th>Apellidos</th>
+						<th>Email</th>
 					</tr>
 				</thead>
 				<tbody>
-					<tr th:each="user : ${requestsList}">
+					<tr th:each="user : ${friendsList}">
 						<td th:text="${user.name}">Nombre</td>
-						<td><a type="button" class="btn btn-default"
-							th:href="${'/user/accept/' + user.email}">Aceptar</a></td>
+						<td th:text="${user.lastName}">Apellidos</td>
+						<td th:text="${user.email}">Email</td>
 					</tr>
 				</tbody>
 			</table>
