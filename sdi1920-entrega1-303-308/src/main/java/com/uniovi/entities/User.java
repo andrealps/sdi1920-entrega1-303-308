@@ -1,6 +1,8 @@
 package com.uniovi.entities;
 
 import javax.persistence.*;
+
+import java.util.HashSet;
 import java.util.Set; //A collection that contains no duplicate elements
 
 @Entity 
@@ -19,7 +21,19 @@ public class User {
 	private String password;
 	@Transient // propiedad que no se almacena en la tabla.
 	private String passwordConfirm;
+	
+	@OneToMany(mappedBy = "usuario1")
+	private Set<Amistad> friends = new HashSet<Amistad>();
 
+	@OneToMany(mappedBy = "usuario2")
+	private Set<Amistad> friendOf = new HashSet<Amistad>();
+	
+	@OneToMany(mappedBy = "pidePeticion")
+	private Set<Peticion> peticionesEnviadas = new HashSet<Peticion>();
+
+	@OneToMany(mappedBy = "recibePeticion")
+	private Set<Peticion> peticionesRecibidas = new HashSet<Peticion>();
+	
 	
 	public User(String email, String name, String lastName) {
 		super();
