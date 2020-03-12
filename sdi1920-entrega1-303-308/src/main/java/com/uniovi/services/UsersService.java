@@ -13,6 +13,7 @@ import com.uniovi.repositories.UsersRepository;
 
 @Service
 public class UsersService {
+	
 	@Autowired
 	private UsersRepository usersRepository;
 
@@ -65,6 +66,10 @@ public class UsersService {
 	public Page<User> findUsers(Pageable pageable, User user) {
 		Page<User> users = usersRepository.listUsers(pageable, user);
 		return users;
+	}
+
+	public User findById(Long l) {
+		return usersRepository.findById(l).get();
 	}
 
 }

@@ -12,13 +12,13 @@
 		<div class="collapse navbar-collapse" id="myNavbar">
 			<ul class="nav navbar-nav" sec:authorize="isAuthenticated()">
 				<li><a href="/">Home</a></li>
-				<li id="users-menu" sec:authorize="hasRole('ROLE_STANDARD')"><a href="/user/list" th:text="#{listUser.message}">Lista de usuarios</a></li>
+				<li id="users-menu" sec:authorize="hasRole('ROLE_STANDARD')"><a href="/user/listUsers" th:text="#{listUser.message}">Lista de usuarios</a></li>
 				<li id="friends-menu" sec:authorize="hasRole('ROLE_STANDARD')" class="dropdown"><a class="dropdown-toggle"
 					data-toggle="dropdown" href="#" th:text="#{friends.message}">Amigos<span class="caret"></span>
 				</a>
 					<ul class="dropdown-menu">
-						<li><a href="/user/friends/list" th:text="#{friendsList.message}">Mis amigos</a></li>
-						<li><a href="/user/friends/request" th:text="#{friendsRequest.message}">Solicitudes de amistad</a></li>
+						<li><a href="/user/listFriends" th:text="#{friendsList.message}">Mis amigos</a></li>
+						<li><a href="/user/listRequests" th:text="#{friendsRequest.message}">Solicitudes de amistad</a></li>
 					</ul></li>
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
