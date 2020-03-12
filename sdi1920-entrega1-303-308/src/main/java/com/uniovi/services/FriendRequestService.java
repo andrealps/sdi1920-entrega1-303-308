@@ -3,6 +3,8 @@ package com.uniovi.services;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.uniovi.entities.FriendRequest;
@@ -17,6 +19,11 @@ public class FriendRequestService {
 	
 	public void addRequest(User userFrom, User userTo) {
 		friendRequestRepository.save(new FriendRequest(userFrom.getId(), userTo.getId()));
+	}
+	
+	public Page<FriendRequest> getFriendRequest(Pageable pageable, User activeUser) {
+		Page<FriendRequest> friendRequests = friendRequestRepository.findAll(pageable);
+		return friendRequests;
 	}
 	
 	// Peticiones que envio un usuario

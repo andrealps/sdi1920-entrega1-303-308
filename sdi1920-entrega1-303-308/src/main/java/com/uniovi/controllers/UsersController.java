@@ -87,15 +87,13 @@ public class UsersController {
 			users = usersService.findUsers(pageable, activeUser);
 		}
 
-		users = compareLists(users.getContent(), activeUser);
-
-		model.addAttribute("usersList", users.getContent());
+		model.addAttribute("usersList", compareLists(users.getContent(), activeUser));
 		model.addAttribute("page", users);
 		return "user/listUsers";
 	}
-	
+
 	// Para ver a que usuario le puedes mandar solicitud
-	private Page<User> compareLists(List<User> users, User user) {
+	private List<User> compareLists(List<User> users, User user) {
 		List<Long> friendLongs = friendRequestService.findFriendRequestByUser(user);
 		List<User> friendRequest = new ArrayList<User>();
 		for (Long l : friendLongs) {
@@ -107,18 +105,7 @@ public class UsersController {
 				u.setFriendRequestSended(true);
 			}
 		}
-		return new PageImpl<User>(users);
-	}
-	
-	@RequestMapping("/user/addFriend/{id}")
-	public String getDetail(Model model, Principal principal, @PathVariable Long id) {
-		String email = principal.getName(); // email es el name de la autenticación
-		User user = usersService.getUserByEmail(email);
-		User userToAdd = usersService.getUser(id);
-		
-		user.addFriend(userToAdd);
-		usersService.saveUser(user);
-		return "redirect:/user/list";
+		return users;
 	}
 
 }
