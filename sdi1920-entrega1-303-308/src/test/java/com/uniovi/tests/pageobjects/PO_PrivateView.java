@@ -29,7 +29,7 @@ public class PO_PrivateView extends PO_NavView {
 		driver.findElement(boton).click();
 	}
 
-	static public void login(WebDriver driver, String email, String pass, String text) {
+	static public void login(WebDriver driver, String email, String pass) {
 
 		// Vamos al formulario de logueo.
 		PO_HomeView.clickOption(driver, "login", "class", "btn btn-primary");
@@ -37,8 +37,33 @@ public class PO_PrivateView extends PO_NavView {
 		PO_LoginView.fillForm(driver, email, pass);
 		// Comprobamos que entramos a la vista que “lista todos los usuarios de la
 		// aplicación”
-		PO_View.checkElement(driver, "text", text);
+		PO_RegisterView.checkKey(driver, "welcome.message", PO_Properties.getSPANISH());
 	}
 
-	
+	public static void enviarPeticiones(WebDriver driver) {
+
+		login(driver, "ejemplo4@gmail.com", "123456");
+		enviarPeticion(driver);
+		PO_HomeView.clickOption(driver, "logout", "text", "Email");
+
+		login(driver, "ejemplo5@gmail.com", "123456");
+		enviarPeticion(driver);
+		PO_HomeView.clickOption(driver, "logout", "text", "Email");
+		
+		login(driver, "ejemplo6@gmail.com", "123456");
+		enviarPeticion(driver);
+		PO_HomeView.clickOption(driver, "logout", "text", "Email");
+
+	}
+
+	private static void enviarPeticion(WebDriver driver) {
+		// Vamos a enviar peticion
+		List<WebElement> elementos = PO_View.checkElement(driver, "free", "//li[contains(@id, 'users-menu')]/a");
+		elementos.get(0).click();
+		// Enviamos peticion
+		elementos = PO_View.checkElement(driver, "free",
+				"//td[contains(text(), 'María')]/following-sibling::*/a[contains(@href, 'friend/add')]");
+		elementos.get(0).click();
+	}
+
 }

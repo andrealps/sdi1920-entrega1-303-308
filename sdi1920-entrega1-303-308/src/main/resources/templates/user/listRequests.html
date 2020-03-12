@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head th:replace="fragments/head" />
+<body>
+	<!-- Barra de Navegación superior -->
+	<nav th:replace="fragments/nav" />
+
+	<div class="container">
+		<h2>Solicitudes de amistad</h2>
+		<p>Tienes las siguientes solicitudes de amistad:</p>
+		<div class="table-responsive">
+			<table class="table table-hover">
+				<thead>
+					<tr>
+						<th>Usuario</th>
+						<th class="col-md-1"></th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="user : ${requestsList}">
+						<td th:text="${user.name}">Nombre</td>
+						<td><a type="button" class="btn btn-default"
+							th:href="${'/user/accept/' + user.email}">Aceptar</a></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		<footer th:replace="fragments/pagination" />
+	</div>
+	<footer th:replace="fragments/footer" />
+</body>
+</html>

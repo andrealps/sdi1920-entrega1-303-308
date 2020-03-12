@@ -13,6 +13,7 @@ import com.uniovi.repositories.UsersRepository;
 
 @Service
 public class UsersService {
+	
 	@Autowired
 	private UsersRepository usersRepository;
 
@@ -57,11 +58,14 @@ public class UsersService {
 		users = usersRepository.searchByNameLastNameAndEmail(pageable, searchText);
 		return users;
 	}
-
-	// TODO que no se muestren ni los administradores ni el usuario autenticado
-	public Page<User> findUsers(Pageable pageable) {
-		Page<User> users = usersRepository.findAll(pageable);
+	
+	public Page<User> findUsers(Pageable pageable, User user) {
+		Page<User> users = usersRepository.listUsers(pageable, user);
 		return users;
+	}
+
+	public User findById(Long l) {
+		return usersRepository.findById(l).get();
 	}
 
 }
