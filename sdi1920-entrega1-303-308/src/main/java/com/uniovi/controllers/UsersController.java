@@ -82,7 +82,17 @@ public class UsersController {
 		model.addAttribute("usersList", users.getContent());
 		model.addAttribute("page", users);
 		return "user/list";
-
+	}
+	
+	@RequestMapping("/user/addFriend/{id}")
+	public String getDetail(Model model, Principal principal, @PathVariable Long id) {
+		String email = principal.getName(); // email es el name de la autenticación
+		User user = usersService.getUserByEmail(email);
+		User userToAdd = usersService.getUser(id);
+		
+		user.addFriend(userToAdd);
+		usersService.saveUser(user);
+		return "redirect:/user/list";
 	}
 
 }

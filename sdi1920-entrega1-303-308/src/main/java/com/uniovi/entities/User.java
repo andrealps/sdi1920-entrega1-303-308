@@ -1,9 +1,11 @@
 package com.uniovi.entities;
 
 import javax.persistence.*;
+
+import java.util.HashSet;
 import java.util.Set; //A collection that contains no duplicate elements
 
-@Entity 
+@Entity
 @Table(name = "user")
 public class User {
 	@Id
@@ -20,7 +22,18 @@ public class User {
 	@Transient // propiedad que no se almacena en la tabla.
 	private String passwordConfirm;
 
-	
+	@OneToMany(mappedBy = "usuario1", cascade = CascadeType.ALL)
+	private Set<Amistad> friends = new HashSet<Amistad>();
+
+	@OneToMany(mappedBy = "usuario2")
+	private Set<Amistad> friendOf = new HashSet<Amistad>();
+
+	@OneToMany(mappedBy = "pidePeticion", cascade = CascadeType.ALL)
+	private Set<Peticion> peticionesEnviadas = new HashSet<Peticion>();
+
+	@OneToMany(mappedBy = "recibePeticion")
+	private Set<Peticion> peticionesRecibidas = new HashSet<Peticion>();
+
 	public User(String email, String name, String lastName) {
 		super();
 		this.email = email;
@@ -86,6 +99,46 @@ public class User {
 	public void setPasswordConfirm(String passwordConfirm) {
 		this.passwordConfirm = passwordConfirm;
 	}
-	
-	
+
+	public Set<Amistad> getFriends() {
+		return friends;
+	}
+
+	public void setFriends(Set<Amistad> friends) {
+		this.friends = friends;
+	}
+
+	public Set<Amistad> getFriendOf() {
+		return friendOf;
+	}
+
+	public void setFriendOf(Set<Amistad> friendOf) {
+		this.friendOf = friendOf;
+	}
+
+	public Set<Peticion> getPeticionesEnviadas() {
+		return peticionesEnviadas;
+	}
+
+	public void setPeticionesEnviadas(Set<Peticion> peticionesEnviadas) {
+		this.peticionesEnviadas = peticionesEnviadas;
+	}
+
+	public Set<Peticion> getPeticionesRecibidas() {
+		return peticionesRecibidas;
+	}
+
+	public void setPeticionesRecibidas(Set<Peticion> peticionesRecibidas) {
+		this.peticionesRecibidas = peticionesRecibidas;
+	}
+
+	public void addFriend(User userToAdd) {
+		Peticion peticion = new Peticion(this, userToAdd);
+
+		if (!this.getPeticionesEnviadas().contains(peticion)) {
+			this.getPeticionesEnviadas().add(peticion);
+			userToAdd.getPeticionesRecibidas().add(peticion);
+		}
+	}
+
 }
