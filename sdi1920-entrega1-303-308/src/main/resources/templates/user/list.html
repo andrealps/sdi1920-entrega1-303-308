@@ -29,6 +29,9 @@
 					<tr th:each="user : ${usersList}">
 						<td th:text="${user.name}">Nombre</td>
 						<td th:text="${user.email}">Email</td>
+						<td>
+							<a type="button" class="btn btn-default"
+								th:href="${'/user/addFriend/' + user.id}">Agregar amigo</a></td>
 					</tr>
 				</tbody>
 			</table>
