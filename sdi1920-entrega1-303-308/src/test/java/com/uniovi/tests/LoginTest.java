@@ -94,16 +94,17 @@ public class LoginTest {
 		PO_RegisterView.checkKey(driver, "login.message", PO_Properties.getSPANISH());
 	}
 	
-//	/**
-//	 * Prueba 3. Inicio de sesión con datos válidos (usuario estándar, email existente, pero contraseña incorrecta).
-//	 */
-//	@Test
-//	public void prueba8() {
-//		// Vamos al formulario de inicio de sesión
-//		PO_HomeView.clickOption(driver, "login", "class", "btn btn-primary");
-//		// Rellenamos el formulario.
-//		PO_LoginView.fillForm(driver, "ejemplo1@gmail.com", "aaaaa");
-//		// Comprobamos que no iniciamos sesión
-//		PO_RegisterView.checkKey(driver, "login.message", PO_Properties.getSPANISH());
-//	}
+	/**
+	 * Prueba 3. Inicio de sesión con datos válidos (usuario estándar, email existente, pero contraseña incorrecta).
+	 */
+	@Test
+	public void prueba8() {
+		// Vamos al formulario de inicio de sesión
+		PO_HomeView.clickOption(driver, "login", "class", "btn btn-primary");
+		// Rellenamos el formulario.
+		PO_LoginView.fillForm(driver, "ejemplo1@gmail.com", "aaaaa");
+		// Comprobamos que no iniciamos sesión (se muestra mensaje de error)
+		PO_RegisterView.checkKey(driver, "login.message", PO_Properties.getSPANISH());
+		PO_RegisterView.checkKey(driver, "login.error.message", PO_Properties.getSPANISH());
+	}
 }
