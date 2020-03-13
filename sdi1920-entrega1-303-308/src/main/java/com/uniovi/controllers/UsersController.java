@@ -1,7 +1,6 @@
 package com.uniovi.controllers;
 
 import java.security.Principal;
-import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -19,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.uniovi.entities.User;
 import com.uniovi.services.FriendRequestService;
+import com.uniovi.services.FriendshipService;
 import com.uniovi.services.RolesService;
 import com.uniovi.services.SecurityService;
 import com.uniovi.services.UsersService;
@@ -26,6 +26,7 @@ import com.uniovi.validators.SignUpFormValidator;
 
 @Controller
 public class UsersController {
+
 	@Autowired
 	private RolesService rolesService;
 
@@ -34,6 +35,9 @@ public class UsersController {
 
 	@Autowired
 	private FriendRequestService friendRequestService;
+
+	@Autowired
+	private FriendshipService friendshipService;
 
 	@Autowired
 	private SecurityService securityService;
@@ -83,26 +87,33 @@ public class UsersController {
 		} else {
 			users = usersService.findUsers(pageable, activeUser);
 		}
-
-		model.addAttribute("usersList", compareLists(users.getContent(), activeUser));
+		
+		model.addAttribute("usersList", comprobarPeticiones(users.getContent(), activeUser, pageable));
 		model.addAttribute("page", users);
 		return "user/listUsers";
 	}
 
 	// Para ver a que usuario le puedes mandar solicitud
-	private List<User> compareLists(List<User> users, User user) {
-		List<Long> friendLongs = friendRequestService.findFriendRequestByUser(user);
-		List<User> friendRequest = new ArrayList<User>();
-		for (Long l : friendLongs) {
-			friendRequest.add(usersService.findById(l));
-		}
+	private Page<User> comprobarPeticiones(List<User> users, User user, Pageable pageable) {
 
+		// Comprobar que no se le ha mandado peticion ya
+		Page<User> requestsSended = friendRequestService.findFriendRequestByUser(user, pageable);
+	
 		for (User u : users) {
-			if (friendRequest.contains(u)) {
+			if (requestsSended.getContent().contains(u)) {
 				u.setFriendRequestSended(true);
 			}
 		}
-		return users;
+
+		// Comprobar que no son amigos
+		for (User u : users) {
+			if (friendshipService.areFriends(user, u, pageable)) {
+				u.setFriendRequestSended(true); // se marca como enviada para que no aparezca
+				user.setFriendRequestSended(true);
+			}
+		}
+
+		return new PageImpl<User>(users);
 	}
 
 }

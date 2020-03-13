@@ -10,34 +10,43 @@ public class FriendRequest {
 	@GeneratedValue
 	private long id;
 
-	@Column(name = "userFrom")
-	Long userFrom;
-	@Column(name = "userTo")
-	Long userTo;
+	@ManyToOne
+	User pidePeticion;
+
+	@ManyToOne
+	User recibePeticion;
 
 	FriendRequest() {
 	}
 
-	public FriendRequest(Long userFrom, Long userTo) {
+	public FriendRequest(User pidePeticion, User recibePeticion) {
 		super();
-		this.userFrom = userFrom;
-		this.userTo = userTo;
+		this.pidePeticion = pidePeticion;
+		this.recibePeticion = recibePeticion;
 	}
 
-	public Long getUserFrom() {
-		return userFrom;
+	public long getId() {
+		return id;
 	}
 
-	public void setLongFrom(Long userFrom) {
-		this.userFrom = userFrom;
+	public void setId(long id) {
+		this.id = id;
 	}
 
-	public Long getLongTo() {
-		return userTo;
+	public User getPidePeticion() {
+		return pidePeticion;
 	}
 
-	public void setLongTo(Long LongTo) {
-		this.userTo = LongTo;
+	public void setPidePeticion(User pidePeticion) {
+		this.pidePeticion = pidePeticion;
+	}
+
+	public User getRecibePeticion() {
+		return recibePeticion;
+	}
+
+	public void setRecibePeticion(User recibePeticion) {
+		this.recibePeticion = recibePeticion;
 	}
 
 }

@@ -1,7 +1,5 @@
 package com.uniovi.services;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -13,38 +11,29 @@ import com.uniovi.repositories.FriendRequestRepository;
 
 @Service
 public class FriendRequestService {
-	
+
 	@Autowired
 	private FriendRequestRepository friendRequestRepository;
-	
+
 	public void addRequest(User userFrom, User userTo) {
-		friendRequestRepository.save(new FriendRequest(userFrom.getId(), userTo.getId()));
+		friendRequestRepository.save(new FriendRequest(userFrom, userTo));
 	}
-	
-	public Page<FriendRequest> getFriendRequest(Pageable pageable, User activeUser) {
-		Page<FriendRequest> friendRequests = friendRequestRepository.findAll(pageable);
-		return friendRequests;
-	}
-	
+
 	// Peticiones que envio un usuario
-	public List<Long> findFriendRequestByUser(User user) {
-		return friendRequestRepository.findFriendRequestByUser(user.getId());
+	public Page<User> findFriendRequestByUser(User user, Pageable pageable) {
+		return friendRequestRepository.findFriendRequestByUser(user.getId(), pageable);
 	}
-	
+
 	// Peticiones que recibio un usuario
-	public List<Long> findFriendRequestToUser(User user) {
-		return friendRequestRepository.findFriendRequestToUser(user.getId());
+	public Page<User> findFriendRequestToUser(User user, Pageable pageable) {
+		return friendRequestRepository.findFriendRequestToUser(user.getId(), pageable);
 	}
-	
+
 	// Aceptar peticion (ser borra la peticion de la bd)
-	public List<Long> acceptFriendRequest( User userFrom, User userTo) {
+	public Page<User> acceptFriendRequest(User userFrom, User userTo,  Pageable pageable) {
 		FriendRequest request = friendRequestRepository.acceptFriendRequest(userFrom.getId(), userTo.getId());
 		friendRequestRepository.delete(request);
-		return friendRequestRepository.findFriendRequestByUser(userTo.getId());
+		return friendRequestRepository.findFriendRequestByUser(userTo.getId(), pageable);
 	}
-	
-	
-
-	
 
 }
