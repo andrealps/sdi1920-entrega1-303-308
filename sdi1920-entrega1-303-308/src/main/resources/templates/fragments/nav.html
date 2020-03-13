@@ -42,7 +42,7 @@
 						class="glyphicon glyphicon-user"></span> Regístrate
 				</a></li>
 				<li sec:authorize="!isAuthenticated()"><a href="/login" th:text="#{login.message}"> <span
-						class="glyphicon glyphicon-log-in"></span> Identif�cate
+						class="glyphicon glyphicon-log-in"></span> Identifícate
 				</a></li>
 
 				<li sec:authorize="isAuthenticated()"><a href="/logout" th:text="#{logout.message}"> <span

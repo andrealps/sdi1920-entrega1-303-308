@@ -1,20 +1,24 @@
 package com.uniovi.tests;
 
-import org.junit.*;
-import org.junit.runners.MethodSorters;
+import static org.junit.Assert.assertTrue;
+import java.util.List;
+
+import org.junit.After;
+import org.junit.AfterClass;
+import org.junit.Before;
+import org.junit.BeforeClass;
+import org.junit.Test;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
 import com.uniovi.tests.pageobjects.PO_HomeView;
 import com.uniovi.tests.pageobjects.PO_Properties;
 import com.uniovi.tests.pageobjects.PO_RegisterView;
 import com.uniovi.tests.pageobjects.PO_View;
+import com.uniovi.tests.util.SeleniumUtils;
 
-//Ordenamos las pruebas por el nombre del método 
-@FixMethodOrder(MethodSorters.NAME_ASCENDING)
-
-public class RegistroTest {
-
+public class FinSesionTest {
 	// En Windows (Debe ser la versión 65.0.1 y desactivar las actualizaciones
 	// automáticas)):
 	static String PathFirefox65 = "C:\\Program Files\\Mozilla Firefox\\firefox.exe";
@@ -55,58 +59,29 @@ public class RegistroTest {
 	}
 
 	/**
-	 * Prueba 1. Registro de Usuario con datos válidos
+	 * Prueba 9. Hacer click en la opción de salir de sesión y comprobar que se
+	 * redirige a la página de inicio de sesión (Login).
 	 */
 	@Test
-	public void PR01() {
+	public void PR09() {
 		// Vamos al formulario de registro
 		PO_HomeView.clickOption(driver, "signup", "class", "btn btn-primary");
 		// Rellenamos el formulario.
 		PO_RegisterView.fillForm(driver, "maria@gmail.com", "María", "Perez", "77777", "77777");
 		// Comprobamos que entramos en la sección privada
 		PO_View.checkElement(driver, "text", "¡Bienvenidos al chat!");
-	}
-
-	/**
-	 * Prueba 2. Registro de Usuario con datos inválidos (email vacío, nombre vacío,
-	 * apellidos vacíos)
-	 * Prueba caso NEGATIVO
-	 */
-	@Test
-	public void PR02() {
-		// Vamos al formulario de registro
-		PO_HomeView.clickOption(driver, "signup", "class", "btn btn-primary");
-		// Rellenamos el formulario.
-		PO_RegisterView.fillForm(driver, "", "", "", "77777", "77777");
-		// Comprobamos que seguimos en el registro
-		PO_RegisterView.checkKey(driver, "signup.message", PO_Properties.getSPANISH());
+		// Salimos de sesión
+		PO_HomeView.clickOption(driver, "logout", "class", "btn btn-primary");
+		// Comprobamos que estamos en la página de login
+		PO_RegisterView.checkKey(driver, "login.message", PO_Properties.getSPANISH());
 	}
 	
 	/**
-	 * Prueba 3. Registro de Usuario con datos inválidos (Repeticiçon de contraseña inválida)
-	 * Prueba caso POSITIVO
+	 * Prueba 10. Comprobar que el botón cerrar sesión no está visible si el usuario no está autenticado.
 	 */
 	@Test
-	public void PR03() {
-		// Vamos al formulario de registro
-		PO_HomeView.clickOption(driver, "signup", "class", "btn btn-primary");
-		// Rellenamos el formulario.
-		PO_RegisterView.fillForm(driver, "a@h.com", "Ejemplo", "Ejemplo2", "77777", "77771");
-		// Comprobamos el error de contraseña inválida
-		PO_RegisterView.checkKey(driver, "Error.signup.passwordConfirm.coincidence", PO_Properties.getSPANISH());
-	}
-	
-	/**
-	 * Prueba 4. Registro de Usuario con datos inválidos (Email existente)
-	 * Prueba caso POSITIVO
-	 */
-	@Test
-	public void PR04() {
-		// Vamos al formulario de registro
-		PO_HomeView.clickOption(driver, "signup", "class", "btn btn-primary");
-		// Rellenamos el formulario.
-		PO_RegisterView.fillForm(driver, "ejemplo1@gmail.com", "Ejemplo", "Ejemplo2", "77777", "77777");
-		// Comprobamos el error de email repetido
-		PO_RegisterView.checkKey(driver, "Error.signup.email.duplicate", PO_Properties.getSPANISH());
+	public void PR10() {
+		// Comprobamos que el botón de cerrar sesión no está disponible al no tener la sesión iniciada
+		SeleniumUtils.textoNoPresentePagina(driver, "Desconectar");
 	}
 }
