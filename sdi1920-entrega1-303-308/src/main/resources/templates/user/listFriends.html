@@ -6,21 +6,21 @@
 	<nav th:replace="fragments/nav" />
 	
 	<div class="container">
-		<h2>Amigos</h2>
+		<h2 th:text="#{friendsList.message}"></h2>
 		<div class="table-responsive">
 			<table class="table table-hover">
 				<thead>
 					<tr>
-						<th>Nombre</th>
-						<th>Apellidos</th>
-						<th>Email</th>
+						<th th:text="#{name}"></th>
+						<th th:text="#{lastName}"></th>
+						<th th:text="#{email}"></th>
 					</tr>
 				</thead>
 				<tbody>
 					<tr th:each="user : ${friendsList}">
-						<td th:text="${user.name}">Nombre</td>
-						<td th:text="${user.lastName}">Apellidos</td>
-						<td th:text="${user.email}">Email</td>
+						<td th:text="${user.name}"></td>
+						<td th:text="${user.lastName}"></td>
+						<td th:text="${user.email}"></td>
 					</tr>
 				</tbody>
 			</table>
