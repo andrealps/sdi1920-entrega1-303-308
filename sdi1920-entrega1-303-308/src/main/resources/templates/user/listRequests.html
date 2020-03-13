@@ -6,21 +6,23 @@
 	<nav th:replace="fragments/nav" />
 
 	<div class="container">
-		<h2>Solicitudes de amistad</h2>
-		<p>Tienes las siguientes solicitudes de amistad:</p>
+		<h2 th:text="#{friendsRequest.message}"></h2>
+		<p th:text="#{friendsRequest.introduction}"></p>
 		<div class="table-responsive">
 			<table class="table table-hover">
 				<thead>
 					<tr>
-						<th>Usuario</th>
+						<th th:text="#{user}"></th>
 						<th class="col-md-1"></th>
 					</tr>
 				</thead>
 				<tbody>
 					<tr th:each="user : ${requestsList}">
-						<td th:text="${user.name}">Nombre</td>
-						<td><a type="button" class="btn btn-default"
-							th:href="${'/user/accept/' + user.email}">Aceptar</a></td>
+						<td th:text="${user.name}"></td>
+						<td>
+						<a type="button" class="btn btn-default"
+							th:href="${'/user/accept/' + user.email}" th:text="#{accept}"></a>
+						</td>
 					</tr>
 				</tbody>
 			</table>
