@@ -5,21 +5,21 @@
 	<!-- Barra de Navegación superior -->
 	<nav th:replace="fragments/nav" />
 	<div class="container">
-		<h2 th:text = "#{listUser.message}" ></h2>
+		<h2 th:text="#{listUser.message}"></h2>
 		<form class="navbar-form" action="/user/listUsers">
 			<div class="form-group">
 				<input name="searchText" type="text" class="form-control" size="50"
 					th:placeholder="#{searchBy}">
 			</div>
-			<button type="submit" class="btn btn-default" th:text = "#{search}"></button>
+			<button type="submit" class="btn btn-default" th:text="#{search}"></button>
 		</form>
-		<p th:text = "#{listUser.introduction}"></p>
+		<p th:text="#{listUser.introduction}"></p>
 		<div class="table-responsive">
 			<table class="table table-hover">
 				<thead>
 					<tr>
-						<th th:text = "#{name}"></th>
-						<th th:text = "#{email}"></th>
+						<th th:text="#{name}"></th>
+						<th th:text="#{email}"></th>
 						<th class="col-md-1"></th>
 					</tr>
 				</thead>
@@ -29,54 +29,10 @@
 						<td th:text="${user.email}"></td>
 						<td><a th:href="${'/friend/add/' + user.email}"> <span
 								th:if="${user.friendRequestSended}"></span> <span
-								th:unless="${user.friendRequestSended}"
-								th:text = "#{sendRequest}"></span>
+								th:unless="${user.friendRequestSended}" th:text="#{sendRequest}"></span>
 						</a></td>
 					</tr>
 				</tbody>
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
 			</table>
 		</div>
 		<footer th:replace="fragments/pagination" />
