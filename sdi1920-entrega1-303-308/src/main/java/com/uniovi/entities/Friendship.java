@@ -10,34 +10,42 @@ public class Friendship {
 	@GeneratedValue
 	private long id;
 
-	@Column(name = "user1")
-	private Long user1;
+	@ManyToOne
+	private User user1;
 
-	@Column(name = "user2")
-	private Long user2;
+	@ManyToOne
+	private User user2;
 
 	public Friendship() {
 	}
 
-	public Friendship(Long user1, Long user2) {
+	public Friendship(User user1, User user2) {
 		super();
 		this.user1 = user1;
 		this.user2 = user2;
 	}
 
-	public Long getUser1() {
+	public long getId() {
+		return id;
+	}
+
+	public void setId(long id) {
+		this.id = id;
+	}
+
+	public User getUser1() {
 		return user1;
 	}
 
-	public void setUser1(Long user1) {
+	public void setUser1(User user1) {
 		this.user1 = user1;
 	}
 
-	public Long getUser2() {
+	public User getUser2() {
 		return user2;
 	}
 
-	public void setUser2(Long user2) {
+	public void setUser2(User user2) {
 		this.user2 = user2;
 	}
 

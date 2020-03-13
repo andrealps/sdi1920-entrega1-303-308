@@ -1,11 +1,14 @@
 package com.uniovi.entities;
 
 import javax.persistence.*;
+
+import java.util.HashSet;
 import java.util.Set; //A collection that contains no duplicate elements
 
 @Entity
 @Table(name = "user")
 public class User {
+
 	@Id
 	@GeneratedValue
 	private long id;
@@ -22,6 +25,18 @@ public class User {
 
 	@Transient
 	private boolean friendRequestSended;
+
+	@OneToMany(mappedBy = "pidePeticion")
+	private Set<FriendRequest> peticionesEnviadas = new HashSet<FriendRequest>();
+
+	@OneToMany(mappedBy = "recibePeticion")
+	private Set<FriendRequest> peticionesRecibidas = new HashSet<FriendRequest>();
+
+	@OneToMany(mappedBy = "user1")
+	private Set<Friendship> friends = new HashSet<Friendship>();
+
+	@OneToMany(mappedBy = "user2")
+	private Set<Friendship> friendOf = new HashSet<Friendship>();
 
 	public User(String email, String name, String lastName) {
 		super();
@@ -95,6 +110,22 @@ public class User {
 
 	public void setFriendRequestSended(boolean friendRequestSended) {
 		this.friendRequestSended = friendRequestSended;
+	}
+
+	public Set<FriendRequest> getPeticionesEnviadas() {
+		return peticionesEnviadas;
+	}
+
+	public void setPeticionesEnviadas(Set<FriendRequest> peticionesEnviadas) {
+		this.peticionesEnviadas = peticionesEnviadas;
+	}
+
+	public Set<FriendRequest> getPeticionesRecibidas() {
+		return peticionesRecibidas;
+	}
+
+	public void setPeticionesRecibidas(Set<FriendRequest> peticionesRecibidas) {
+		this.peticionesRecibidas = peticionesRecibidas;
 	}
 
 }

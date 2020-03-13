@@ -1,9 +1,7 @@
 package com.uniovi.controllers;
 
 import java.security.Principal;
-import java.util.ArrayList;
 import java.util.LinkedList;
-import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -27,7 +25,7 @@ public class FriendRequestController {
 
 	@Autowired
 	private FriendRequestService friendRequestService;
-	
+
 	@Autowired
 	private FriendshipService friendshipService;
 
@@ -47,54 +45,32 @@ public class FriendRequestController {
 		User activeUser = usersService.getUserByEmail(email);
 
 		Page<User> requests = new PageImpl<User>(new LinkedList<User>());
-		requests = getRequestsLists(requests.getContent(), activeUser);
-		
+		requests = friendRequestService.findFriendRequestToUser(activeUser, pageable);
+
 		model.addAttribute("requestsList", requests.getContent());
 		model.addAttribute("page", requests);
 		return "user/listRequests";
 	}
-	
+
 	@RequestMapping("/user/accept/{email}")
-	public String acceptRequest(Model model, Principal principal, @PathVariable String email) {
-		
+	public String acceptRequest(Model model, Principal principal, @PathVariable String email, Pageable pageable) {
+
 		String emailUserTo = principal.getName();
 		User userTo = usersService.getUserByEmail(emailUserTo);
-		
+
 		User userFrom = usersService.getUserByEmail(email);
-		
+
 		// Ahora son amigos
-		friendshipService.addFriendShip(userTo.getId(), userFrom.getId());
-		
+		friendshipService.addFriendShip(userTo, userFrom);
+
 		// Actualizar la lista de peticiones
 		Page<User> requests = new PageImpl<User>(new LinkedList<User>());
-		requests = acceptRequest(requests.getContent(), userFrom, userTo);
-		
+		requests = friendRequestService.acceptFriendRequest(userFrom, userTo, pageable);
+
 		model.addAttribute("requestsList", requests.getContent());
 		model.addAttribute("page", requests);
-		
+
 		return "redirect:/user/listRequests";
 	}
-	
-
-	private Page<User> getRequestsLists(List<User> users, User user) {
-		List<Long> requestUserLongs = friendRequestService.findFriendRequestToUser(user);
-		List<User> friendRequest = new ArrayList<User>();
-		for (Long l : requestUserLongs) {
-			friendRequest.add(usersService.findById(l));
-		}
-		
-		return new PageImpl<User>(friendRequest);
-	}
-	
-	private Page<User> acceptRequest(List<User> users, User userFrom, User userTo) {
-		List<Long> requests = friendRequestService.acceptFriendRequest(userFrom, userTo);
-		List<User> friendRequest = new ArrayList<User>();
-		for (Long l : requests) {
-			friendRequest.add(usersService.findById(l));
-		}
-		
-		return new PageImpl<User>(friendRequest);
-	}
-
 
 }

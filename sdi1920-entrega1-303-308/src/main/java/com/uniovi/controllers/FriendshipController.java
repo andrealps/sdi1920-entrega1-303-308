@@ -1,9 +1,7 @@
 package com.uniovi.controllers;
 
 import java.security.Principal;
-import java.util.ArrayList;
 import java.util.LinkedList;
-import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -33,20 +31,11 @@ public class FriendshipController {
 		User activeUser = usersService.getUserByEmail(email);
 
 		Page<User> friends = new PageImpl<User>(new LinkedList<User>());
-		friends = getFriendsLists(friends.getContent(), activeUser);
-
+		friends = friendshipService.findFriendsByUser(activeUser, pageable);
+		
 		model.addAttribute("friendsList", friends.getContent());
 		model.addAttribute("page", friends);
 		return "user/listFriends";
 	}
 
-	private Page<User> getFriendsLists(List<User> users, User user) {
-		List<Long> friendsId = friendshipService.findFriendsByUser(user);
-		List<User> friends = new ArrayList<User>();
-		for (Long l : friendsId) {
-			friends.add(usersService.findById(l));
-		}
-		
-		return new PageImpl<User>(friends);
-	}
 }
