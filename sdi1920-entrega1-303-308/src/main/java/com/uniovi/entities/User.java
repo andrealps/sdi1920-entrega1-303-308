@@ -2,9 +2,6 @@ package com.uniovi.entities;
 
 import javax.persistence.*;
 
-import java.util.HashSet;
-import java.util.Set; //A collection that contains no duplicate elements
-
 @Entity
 @Table(name = "user")
 public class User {

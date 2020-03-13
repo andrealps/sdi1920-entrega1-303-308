@@ -9,7 +9,6 @@ import com.uniovi.tests.pageobjects.PO_HomeView;
 import com.uniovi.tests.pageobjects.PO_LoginView;
 import com.uniovi.tests.pageobjects.PO_Properties;
 import com.uniovi.tests.pageobjects.PO_RegisterView;
-import com.uniovi.tests.pageobjects.PO_View;
 
 //Ordenamos las pruebas por el nombre del método 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
