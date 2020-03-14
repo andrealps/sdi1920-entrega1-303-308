@@ -66,4 +66,16 @@ public class SeguridadTest {
 		// Comprobamos que nos redirige a la página de inicio de sesión
 		PO_RegisterView.checkKey(driver, "login.message", PO_Properties.getSPANISH());
 	}
+
+	/**
+	 * Prueba 22. Intentar acceder sin estar autenticado a la opción de listado de
+	 * publicaciones de un usuario estándar. Se deberá volver al formulario de login
+	 */
+	@Test
+	public void PR22() {
+		// Intentamos acceder al listado de usuarios
+		driver.navigate().to("http://localhost:8090/post/listPost");
+		// Comprobamos que nos redirige a la página de inicio de sesión
+		PO_RegisterView.checkKey(driver, "login.message", PO_Properties.getSPANISH());
+	}
 }
