@@ -72,11 +72,6 @@ public class ListaUsuariosTest {
 		driver.quit();
 	}
 
-	@Test
-	public void test() {
-		fail("Not yet implemented");
-	}
-
 	// [Prueba12]
 	// Hacer una búsqueda con el campo vacío y comprobar que se muestra la página
 	// que corresponde con el listado usuarios existentes en el sistema.

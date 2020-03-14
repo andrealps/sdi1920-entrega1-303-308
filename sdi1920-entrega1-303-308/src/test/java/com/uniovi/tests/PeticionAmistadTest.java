@@ -72,11 +72,6 @@ public class PeticionAmistadTest {
 		driver.quit();
 	}
 
-//	@Test
-//	public void test() {
-//		fail("Not yet implemented");
-//	}
-
 	// [Prueba15]
 	// Desde el listado de usuarios de la aplicación, enviar una invitación de
 	// amistad a un usuario.
