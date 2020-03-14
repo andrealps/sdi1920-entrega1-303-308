@@ -45,8 +45,11 @@ public class InternacionalizacionTest {
 	}
 
 	/**
-	 * PR20. Pruebas de internacionalización 1. Página de registro 2. Página de
-	 * login 3. Página de Lista de usuarios 4. Página de Lista de amigos
+	 * PR20. Pruebas de internacionalización 
+	 * 1. Página de registro
+	 * 2. Página de login
+	 * 3. Página de Lista de usuarios
+	 * 4. Página de Lista de amigos
 	 */
 	@Test
 	public void PR20() {
@@ -100,13 +103,12 @@ public class InternacionalizacionTest {
 		// Esperamos a que aparezca la pestaña de solicitud de amistad
 		elementos = PO_View.checkElement(driver, "free", "//a[contains(@href, 'user/listRequests')]");
 		elementos.get(0).click();
-		
-//		// Comprobamos que el título de la página está en español
-//		PO_RegisterView.checkKey(driver, "friendsRequest.message", PO_Properties.getSPANISH());
-//		// Cambio de idioma de Español a Ingles
-//		PO_HomeView.changeIdiom(driver, "btnEnglish");
-//		// Comprobamos que cambia el idioma de la página de peticiones de amistad
-//		PO_RegisterView.checkKey(driver, "friendsRequest.message", PO_Properties.getENGLISH());
+		// Comprobamos que el título de la página está en español
+		PO_RegisterView.checkKey(driver, "friendsRequest.introduction", PO_Properties.getSPANISH());
+		// Cambio de idioma de Español a Ingles
+		PO_HomeView.changeIdiom(driver, "btnEnglish");
+		// Comprobamos que cambia el idioma de la página de peticiones de amistad
+		PO_RegisterView.checkKey(driver, "friendsRequest.introduction", PO_Properties.getENGLISH());
 		
 	}
 
