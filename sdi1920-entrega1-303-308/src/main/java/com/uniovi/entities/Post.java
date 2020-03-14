@@ -23,7 +23,7 @@ public class Post {
 		this.date = LocalDate.now();
 	}
 
-	public Post(String title, String text, Date date, User user) {
+	public Post(String title, String text, User user) {
 		this();
 		this.title = title;
 		this.text = text;

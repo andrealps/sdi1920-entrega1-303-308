@@ -15,6 +15,7 @@ import com.uniovi.entities.Post;
 import com.uniovi.entities.User;
 import com.uniovi.services.PostsService;
 import com.uniovi.services.UsersService;
+import com.uniovi.validators.AddPostValidator;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
@@ -28,6 +29,9 @@ public class PostsController {
 	@Autowired
 	private UsersService usersService;
 	
+	@Autowired
+	private AddPostValidator addPostFormValidator;
+	
 	@RequestMapping(value = "/post/addPost")
 	public String getPost(Model model) {
 		model.addAttribute("post", new Post());
@@ -36,6 +40,10 @@ public class PostsController {
 
 	@RequestMapping(value = "/post/addPost", method = RequestMethod.POST)
 	public String setPost(@Validated Post post, Principal principal, BindingResult result) {
+		addPostFormValidator.validate(post, result);
+		if (result.hasErrors()) {
+			return "/post/addPost";
+		}
 		String email = principal.getName(); // email es el name de la autenticación
 		User user = usersService.getUserByEmail(email);
 		post.setUser(user);
