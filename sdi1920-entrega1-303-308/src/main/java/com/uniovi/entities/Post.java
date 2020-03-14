@@ -1,5 +1,6 @@
 package com.uniovi.entities;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 import javax.persistence.Entity;
@@ -14,20 +15,22 @@ public class Post {
 	private long id;
 	private String title;
 	private String text;
-	private Date date;
+	private LocalDate date;
 	@ManyToOne
 	private User user;
-	
-	public Post() {}
-	
+
+	public Post() {
+		this.date = LocalDate.now();
+	}
+
 	public Post(String title, String text, Date date, User user) {
-		super();
+		this();
 		this.title = title;
 		this.text = text;
-		this.date = date;
 		this.user = user;
+		user.getListPost().add(this);
 	}
-	
+
 	public long getId() {
 		return id;
 	}
@@ -52,11 +55,11 @@ public class Post {
 		this.text = text;
 	}
 
-	public Date getDate() {
+	public LocalDate getDate() {
 		return date;
 	}
 
-	public void setDate(Date date) {
+	public void setDate(LocalDate date) {
 		this.date = date;
 	}
 
@@ -66,5 +69,5 @@ public class Post {
 
 	public void setUser(User user) {
 		this.user = user;
-	}	
+	}
 }
