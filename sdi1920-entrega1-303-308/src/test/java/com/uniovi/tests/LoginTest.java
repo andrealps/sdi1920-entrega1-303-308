@@ -58,7 +58,7 @@ public class LoginTest {
 	 * Prueba 1. Inicio de sesión con datos válidos (administrador)
 	 */
 	@Test
-	public void prueba5() {
+	public void PR05() {
 		// Vamos al formulario de inicio de sesión
 		PO_HomeView.clickOption(driver, "login", "class", "btn btn-primary");
 		// Rellenamos el formulario.
@@ -71,7 +71,7 @@ public class LoginTest {
 	 * Prueba 2. Inicio de sesión con datos válidos (usuario estándar)
 	 */
 	@Test
-	public void prueba6() {
+	public void PR06() {
 		// Vamos al formulario de inicio de sesión
 		PO_HomeView.clickOption(driver, "login", "class", "btn btn-primary");
 		// Rellenamos el formulario.
@@ -84,7 +84,7 @@ public class LoginTest {
 	 * Prueba 3. Inicio de sesión con datos inválidos (usuario estándar, campo email y contraseña vacíos).
 	 */
 	@Test
-	public void prueba7() {
+	public void PR07() {
 		// Vamos al formulario de inicio de sesión
 		PO_HomeView.clickOption(driver, "login", "class", "btn btn-primary");
 		// Rellenamos el formulario.
@@ -97,7 +97,7 @@ public class LoginTest {
 	 * Prueba 3. Inicio de sesión con datos válidos (usuario estándar, email existente, pero contraseña incorrecta).
 	 */
 	@Test
-	public void prueba8() {
+	public void PR08() {
 		// Vamos al formulario de inicio de sesión
 		PO_HomeView.clickOption(driver, "login", "class", "btn btn-primary");
 		// Rellenamos el formulario.
