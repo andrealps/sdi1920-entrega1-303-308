@@ -20,6 +20,13 @@
 						<li><a href="/user/listFriends" th:text="#{friendsList.message}"></a></li>
 						<li><a href="/user/listRequests" th:text="#{friendsRequest.message}"></a></li>
 					</ul></li>
+				<li id="posts-menu" sec:authorize="hasRole('ROLE_STANDARD')" class="dropdown"><a class="dropdown-toggle"
+					data-toggle="dropdown" href="#" th:text="#{posts.message}"><span class="caret"></span>
+				</a>
+					<ul class="dropdown-menu">
+						<li><a href="/post/addPost" th:text="#{addPost.message}"></a></li>
+						<li><a href="/post/listPost" th:text="#{listPost.message}"></a></li>
+					</ul></li>
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
 				<li class="dropdown"><a id="btnLanguage" href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
