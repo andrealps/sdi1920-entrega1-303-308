@@ -71,11 +71,11 @@ public class InternacionalizacionTest {
 		// Vamos al formulario de login
 		PO_HomeView.clickOption(driver, "login", "class", "btn btn-primary");
 		// Comprobamos que el título de la página está en español
-		PO_RegisterView.checkKey(driver, "login.message", PO_Properties.getSPANISH());
+		PO_LoginView.checkKey(driver, "login.message", PO_Properties.getSPANISH());
 		// Cambio de idioma de Español a Ingles
 		PO_HomeView.changeIdiom(driver, "btnEnglish");
 		// Comprobamos que cambia el idioma de la página de login
-		PO_RegisterView.checkKey(driver, "login.message", PO_Properties.getENGLISH());
+		PO_LoginView.checkKey(driver, "login.message", PO_Properties.getENGLISH());
 
 		////////////////////////////////////// LISTA DE USUARIOS //////////////////////////////////////
 		
@@ -87,11 +87,11 @@ public class InternacionalizacionTest {
 		List<WebElement> elementos = PO_View.checkElement(driver, "free", "//li[contains(@id, 'users-menu')]/a");
 		elementos.get(0).click();
 		// Comprobamos que el título de la página está en español
-		PO_RegisterView.checkKey(driver, "listUser.message", PO_Properties.getSPANISH());
+		PO_NavView.checkKey(driver, "listUser.message", PO_Properties.getSPANISH());
 		// Cambio de idioma de Español a Ingles
 		PO_HomeView.changeIdiom(driver, "btnEnglish");
 		// Comprobamos que cambia el idioma de la página de registro
-		PO_RegisterView.checkKey(driver, "listUser.message", PO_Properties.getENGLISH());
+		PO_NavView.checkKey(driver, "listUser.message", PO_Properties.getENGLISH());
 
 		////////////////////////////////////// SOLICITUDES DE AMISTAD //////////////////////////////////////
 		
@@ -104,11 +104,11 @@ public class InternacionalizacionTest {
 		elementos = PO_View.checkElement(driver, "free", "//a[contains(@href, 'user/listRequests')]");
 		elementos.get(0).click();
 		// Comprobamos que el título de la página está en español
-		PO_RegisterView.checkKey(driver, "friendsRequest.introduction", PO_Properties.getSPANISH());
+		PO_NavView.checkKey(driver, "friendsRequest.introduction", PO_Properties.getSPANISH());
 		// Cambio de idioma de Español a Ingles
 		PO_HomeView.changeIdiom(driver, "btnEnglish");
 		// Comprobamos que cambia el idioma de la página de peticiones de amistad
-		PO_RegisterView.checkKey(driver, "friendsRequest.introduction", PO_Properties.getENGLISH());
+		PO_NavView.checkKey(driver, "friendsRequest.introduction", PO_Properties.getENGLISH());
 		
 	}
 

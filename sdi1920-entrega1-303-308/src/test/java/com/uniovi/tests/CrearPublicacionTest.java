@@ -16,7 +16,6 @@ import com.uniovi.tests.pageobjects.PO_HomeView;
 import com.uniovi.tests.pageobjects.PO_LoginView;
 import com.uniovi.tests.pageobjects.PO_PostsView;
 import com.uniovi.tests.pageobjects.PO_Properties;
-import com.uniovi.tests.pageobjects.PO_RegisterView;
 import com.uniovi.tests.pageobjects.PO_View;
 
 //Ordenamos las pruebas por el nombre del método 
@@ -82,7 +81,7 @@ public class CrearPublicacionTest {
 		// Rellenamos una publicación con datos válidos
 		PO_PostsView.fillForm(driver, "Noche en la mon", "Aquí de fiesta");
 		// Comprobamos que nos redirige a la página de lista de publicaciones
-		PO_RegisterView.checkKey(driver, "listPost.introduction", PO_Properties.getSPANISH());
+		PO_PostsView.checkKey(driver, "listPost.introduction", PO_Properties.getSPANISH());
 	}
 
 	/**
@@ -106,7 +105,7 @@ public class CrearPublicacionTest {
 		// Rellenamos una publicación con datos inválidos 
 		PO_PostsView.fillForm(driver, "", "");
 		// Comprobamos que se muestra el error de campos vacíos
-		PO_RegisterView.checkKey(driver, "addPost.title.error", PO_Properties.getSPANISH());
-		PO_RegisterView.checkKey(driver, "addPost.text.error", PO_Properties.getSPANISH());
+		PO_PostsView.checkKey(driver, "addPost.title.error", PO_Properties.getSPANISH());
+		PO_PostsView.checkKey(driver, "addPost.text.error", PO_Properties.getSPANISH());
 	}
 }

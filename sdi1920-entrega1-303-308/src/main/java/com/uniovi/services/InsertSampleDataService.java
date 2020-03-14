@@ -17,6 +17,9 @@ public class InsertSampleDataService {
 	private RolesService rolesService;
 
 	@Autowired
+	private FriendshipService friendshipService;
+	
+	@Autowired
 	private PostsService postsService;
 
 	@PostConstruct
@@ -63,19 +66,24 @@ public class InsertSampleDataService {
 		usersService.addUser(admin);
 		
 		
-		Post post = new Post("Titulo 1", "Texto1", user1);
-		Post post2 = new Post("Titulo 2", "Texto2", user1);
-		Post post3 = new Post("Titulo 3", "Texto3", user1);
-		Post post4 = new Post("Titulo 4", "Texto4", user1);
-		Post post5 = new Post("Titulo 5", "Texto5", user1);
-		Post post6 = new Post("Titulo 6", "Texto6", user1);
-		Post post7 = new Post("Titulo 7", "Texto7", user1);
-		postsService.addPost(post);
+		friendshipService.addFriendShip(user4, user5);
+		
+		
+		Post post1 = new Post("Titulo 1", "Texto 1", user1);
+		Post post2 = new Post("Titulo 2", "Texto 2", user1);
+		Post post3 = new Post("Titulo 3", "Texto 3", user1);
+		Post post4 = new Post("Titulo 4", "Texto 4", user1);
+		Post post5 = new Post("Titulo 5", "Texto 5", user1);
+		Post post6 = new Post("Titulo 6", "Texto 6", user1);
+		Post post7 = new Post("Titulo 7", "Texto 7", user1);
+		Post post8 = new Post("Título post usuario 5", "Texto post usuario 5", user5);
+		postsService.addPost(post1);
 		postsService.addPost(post2);
 		postsService.addPost(post3);
 		postsService.addPost(post4);
 		postsService.addPost(post5);
 		postsService.addPost(post6);
 		postsService.addPost(post7);
+		postsService.addPost(post8);
 	}
 }

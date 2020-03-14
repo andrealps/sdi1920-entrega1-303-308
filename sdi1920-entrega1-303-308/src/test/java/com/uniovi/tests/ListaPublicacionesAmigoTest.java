@@ -1,5 +1,8 @@
 package com.uniovi.tests;
 
+import static org.junit.Assert.assertTrue;
+
+import java.util.List;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -8,14 +11,16 @@ import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
-
+import com.uniovi.tests.pageobjects.PO_HomeView;
 import com.uniovi.tests.pageobjects.PO_LoginView;
-import com.uniovi.tests.pageobjects.PO_Properties;
+import com.uniovi.tests.pageobjects.PO_View;
+import com.uniovi.tests.util.SeleniumUtils;
 
 //Ordenamos las pruebas por el nombre del método 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
-public class SeguridadTest {
+public class ListaPublicacionesAmigoTest {
 
 	// En Windows (Debe ser la versión 65.0.1 y desactivar las actualizaciones
 	// automáticas)):
@@ -57,26 +62,26 @@ public class SeguridadTest {
 	}
 
 	/**
-	 * Prueba 21. Intentar acceder sin estar autenticado a la opción de listado de
-	 * usuarios. Se deberá volver al formulario de login
+	 * Prueba 27. Mostrar el listado de publicaciones de un usuario amigo y
+	 * comprobar que se muestran todas las que existen para dicho usuario.
+	 * 
 	 */
 	@Test
-	public void PR21() {
-		// Intentamos acceder al listado de usuarios
-		driver.navigate().to("http://localhost:8090/user/listUsers");
-		// Comprobamos que nos redirige a la página de inicio de sesión
-		PO_LoginView.checkKey(driver, "login.message", PO_Properties.getSPANISH());
-	}
-
-	/**
-	 * Prueba 22. Intentar acceder sin estar autenticado a la opción de listado de
-	 * publicaciones de un usuario estándar. Se deberá volver al formulario de login
-	 */
-	@Test
-	public void PR22() {
-		// Intentamos acceder al listado de usuarios
-		driver.navigate().to("http://localhost:8090/post/listPost");
-		// Comprobamos que nos redirige a la página de inicio de sesión
-		PO_LoginView.checkKey(driver, "login.message", PO_Properties.getSPANISH());
+	public void PR27() {
+		// Vamos al formulario de login
+		PO_HomeView.clickOption(driver, "login", "class", "btn btn-primary");
+		// Iniciamos sesión con un usuario registrado
+		PO_LoginView.fillForm(driver, "ejemplo4@gmail.com", "123456");
+		List<WebElement> elementos = PO_View.checkElement(driver, "free", "//li[contains(@id, 'friends-menu')]/a");
+		elementos.get(0).click();
+		// Esperamos a que aparezca la pestaña de lista de amigos
+		elementos = PO_View.checkElement(driver, "free", "//a[contains(@href, 'user/listFriends')]");
+		elementos.get(0).click();
+		// Comprobamos que estamos en la página de amigos mirando que se encuentre a la usuaria Andrea
+		SeleniumUtils.textoPresentePagina(driver, "Andrea");
+		// Accedemos a las publicaciones del usuario5
+		elementos = PO_View.checkElement(driver, "text", "Andrea");
+		elementos.get(0).click();
+		assertTrue(elementos.size() == 1);
 	}
 }

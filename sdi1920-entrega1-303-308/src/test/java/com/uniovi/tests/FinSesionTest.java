@@ -9,6 +9,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
 import com.uniovi.tests.pageobjects.PO_HomeView;
+import com.uniovi.tests.pageobjects.PO_LoginView;
 import com.uniovi.tests.pageobjects.PO_Properties;
 import com.uniovi.tests.pageobjects.PO_RegisterView;
 import com.uniovi.tests.pageobjects.PO_View;
@@ -69,7 +70,7 @@ public class FinSesionTest {
 		// Salimos de sesión
 		PO_HomeView.clickOption(driver, "logout", "class", "btn btn-primary");
 		// Comprobamos que estamos en la página de login
-		PO_RegisterView.checkKey(driver, "login.message", PO_Properties.getSPANISH());
+		PO_LoginView.checkKey(driver, "login.message", PO_Properties.getSPANISH());
 	}
 	
 	/**
