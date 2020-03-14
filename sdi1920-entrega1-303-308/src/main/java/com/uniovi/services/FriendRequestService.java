@@ -36,12 +36,12 @@ public class FriendRequestService {
 		
 		// Comprobar si hay peticion a la inversa
 		Page<User> peticionesEnviadas = findFriendRequestByUser(userTo, pageable);
-		for(User u : peticionesEnviadas) {
+//		for(User u : peticionesEnviadas) {
 			if(peticionesEnviadas.getContent().contains(userFrom)) {
 				FriendRequest f = friendRequestRepository.acceptFriendRequest(userTo.getId(), userFrom.getId());
 				friendRequestRepository.delete(f);
 			}
-		}
+//		}
 		return friendRequestRepository.findFriendRequestByUser(userTo.getId(), pageable);
 	}
 

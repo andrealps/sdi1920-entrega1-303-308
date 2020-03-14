@@ -37,6 +37,9 @@ public class User {
 
 	@OneToMany(mappedBy = "user2")
 	private Set<Friendship> friendOf = new HashSet<Friendship>();
+	
+	@OneToMany(mappedBy = "user")
+	private Set<Post> listPost = new HashSet<Post>();
 
 	public User(String email, String name, String lastName) {
 		super();
@@ -128,4 +131,11 @@ public class User {
 		this.peticionesRecibidas = peticionesRecibidas;
 	}
 
+	public Set<Post> getListPost() {
+		return listPost;
+	}
+
+	public void setListPost(Set<Post> listPost) {
+		this.listPost = listPost;
+	}
 }
