@@ -57,11 +57,9 @@ public class PostsController {
 		post.setUser(user);
 
 		if (!file.isEmpty()) {
-			String tipo = file.getContentType();
-			Long tamaño = file.getSize();
 			byte[] pixel = file.getBytes();
 
-			Photo photo = new Photo(tipo, tamaño, pixel);
+			Photo photo = new Photo(pixel);
 			post.setPhoto(photo);
 		}
 

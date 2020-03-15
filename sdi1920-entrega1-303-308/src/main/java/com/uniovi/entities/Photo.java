@@ -13,8 +13,6 @@ public class Photo {
 	@GeneratedValue
 	private long id;
 	
-	private String tipo;
-	private Long tamaño;
 	@Type(type = "org.hibernate.type.MaterializedBlobType")
 	private byte[] pixel;
 	
@@ -23,28 +21,9 @@ public class Photo {
 	
 	public Photo() {}
 	
-	public Photo(String tipo, Long tamaño, byte[] pixel) {
+	public Photo(byte[] pixel) {
 		super();
-		this.tipo = tipo;
-		this.tamaño = tamaño;
 		this.pixel = pixel;
-	}
-
-	
-	public String getTipo() {
-		return tipo;
-	}
-
-	public void setTipo(String tipo) {
-		this.tipo = tipo;
-	}
-
-	public Long getTamaño() {
-		return tamaño;
-	}
-
-	public void setTamaño(Long tamaño) {
-		this.tamaño = tamaño;
 	}
 
 	public byte[] getPixel() {
