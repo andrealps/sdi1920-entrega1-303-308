@@ -115,5 +115,16 @@ public class UsersController {
 
 		return new PageImpl<User>(users);
 	}
-
+	
+	
+	@RequestMapping("/admin/listUsersAdmin")
+	public String getListado(Model model, Pageable pageable, Principal principal) {
+		String email = principal.getName();
+		User activeUser = usersService.getUserByEmail(email);
+		
+		Page<User> users =  usersService.findUsers(pageable, activeUser);
+		model.addAttribute("usersList", users.getContent());
+		model.addAttribute("page", users);
+		return "admin/listUsersAdmin";
+	}
 }

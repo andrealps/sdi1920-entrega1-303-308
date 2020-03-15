@@ -71,10 +71,12 @@ public class PeticionAmistadTest {
 		driver.quit();
 	}
 
-	// [Prueba15]
-	// Desde el listado de usuarios de la aplicación, enviar una invitación de
-	// amistad a un usuario.
-	// Comprobar que la solicitud de amistad aparece en el listado de invitaciones
+	/**
+	 * [Prueba15]
+	 * Desde el listado de usuarios de la aplicación, enviar una invitación de
+	 *  amistad a un usuario.
+	 * Comprobar que la solicitud de amistad aparece en el listado de invitaciones
+	 * */
 	@Test
 	public void PR15() {
 		// Nos logueamos
@@ -103,10 +105,12 @@ public class PeticionAmistadTest {
 
 	}
 
-	// [Prueba16]
-	// Desde el listado de usuarios de la aplicación, enviar una invitación de
-	// amistad a un usuario al que ya le habíamos enviado la invitación previamente.
-	// No debería dejarnos enviar la invitación.
+	/**
+	 * [Prueba16]
+	 * Desde el listado de usuarios de la aplicación, enviar una invitación de
+	 * amistad a un usuario al que ya le habíamos enviado la invitación previamente.
+	 * No debería dejarnos enviar la invitación.
+	 */
 	@Test
 	public void PR16() {
 		// Nos logueamos
@@ -130,8 +134,10 @@ public class PeticionAmistadTest {
 		PO_HomeView.clickOption(driver, "logout", "text", "Email");
 	}
 
-	// [Prueba 17]
-	// Mostrar el listado de invitaciones de amistad recibidas
+	/**
+	 * [Prueba 17]
+	 * Mostrar el listado de invitaciones de amistad recibidas
+	 */
 	@Test
 	public void PR17() {
 		// Enviamos 3 peticiones con varios usuarios al ejemplo3@gmail.com(Maria)
@@ -151,10 +157,12 @@ public class PeticionAmistadTest {
 		PO_HomeView.clickOption(driver, "logout", "text", "Email");
 	}
 
-	// [Prueba18]
-	// Sobre el listado de invitaciones recibidas. Hacer click en el botón/enlace de
-	// una de ellas y
-	// comprobar que dicha solicitud desaparece del listado de invitaciones.
+	/** 
+	 * [Prueba18]
+	 * Sobre el listado de invitaciones recibidas. Hacer click en el botón/enlace de
+	 * una de ellas y
+	 * comprobar que dicha solicitud desaparece del listado de invitaciones.
+	 */
 	@Test
 	public void PR18() {
 		// Nos logueamos con ese usuario
@@ -177,9 +185,10 @@ public class PeticionAmistadTest {
 		PO_HomeView.clickOption(driver, "logout", "text", "Email");
 	}
 
-	// [Prueba19]
-	// Mostrar el listado de amigos de un usuario.
-	// Comprobar que el listado contiene los amigos que deben ser.
+	/** [Prueba19]
+	* Mostrar el listado de amigos de un usuario.
+	* Comprobar que el listado contiene los amigos que deben ser.
+	*/
 	@Test
 	public void PR19() {
 		// Nos logueamos

@@ -13,7 +13,7 @@ import com.uniovi.repositories.UsersRepository;
 
 @Service
 public class UsersService {
-	
+
 	@Autowired
 	private UsersRepository usersRepository;
 
@@ -26,9 +26,7 @@ public class UsersService {
 	}
 
 	public Page<User> getUsers(Pageable pageable, User user) {
-		// List<User> users = new ArrayList<User>();
 		Page<User> users = usersRepository.findAll(pageable);
-		//usersRepository.findAll().forEach(users::add);
 		return users;
 	}
 
@@ -40,7 +38,7 @@ public class UsersService {
 		user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
 		usersRepository.save(user);
 	}
-	
+
 	public void saveUser(User user) {
 		usersRepository.save(user);
 	}
@@ -48,7 +46,7 @@ public class UsersService {
 	public User getUserByEmail(String email) {
 		return usersRepository.findByEmail(email);
 	}
-	
+
 	public User getUserByEmailAndPassword(String email, String password) {
 		return usersRepository.findByEmailAndPassword(email, password);
 	}
@@ -63,7 +61,7 @@ public class UsersService {
 		users = usersRepository.searchByNameLastNameAndEmail(pageable, searchText);
 		return users;
 	}
-	
+
 	public Page<User> findUsers(Pageable pageable, User user) {
 		Page<User> users = usersRepository.listUsers(pageable, user);
 		return users;
@@ -72,6 +70,6 @@ public class UsersService {
 	public User findById(Long l) {
 		return usersRepository.findById(l).get();
 	}
-	
+
 
 }
