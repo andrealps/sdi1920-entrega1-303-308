@@ -1,10 +1,16 @@
 package com.uniovi.entities;
 
 import java.time.LocalDate;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
+
+import org.apache.tomcat.util.codec.binary.Base64;
 
 @Entity
 public class Post {
@@ -14,8 +20,13 @@ public class Post {
 	private String title;
 	private String text;
 	private LocalDate date;
+
 	@ManyToOne
 	private User user;
+
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "photo_id", referencedColumnName = "id")
+	private Photo photo;
 
 	public Post() {
 		this.date = LocalDate.now();
@@ -26,7 +37,6 @@ public class Post {
 		this.title = title;
 		this.text = text;
 		this.user = user;
-		user.getListPost().add(this);
 	}
 
 	public long getId() {
@@ -67,5 +77,22 @@ public class Post {
 
 	public void setUser(User user) {
 		this.user = user;
+	}
+
+	public Photo getPhoto() {
+		return photo;
+	}
+
+	public void setPhoto(Photo photo) {
+		this.photo = photo;
+		photo.setPost(this);
+	}
+
+	public boolean hasPhoto() {
+		return photo != null ? true : false;
+	}
+	
+	public String getBase64Image() {
+		return Base64.encodeBase64String(photo.getPixel());
 	}
 }

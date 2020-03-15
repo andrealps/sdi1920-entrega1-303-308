@@ -1,5 +1,8 @@
 package com.uniovi.services;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+
 import javax.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -77,6 +80,8 @@ public class InsertSampleDataService {
 		Post post6 = new Post("Titulo 6", "Texto 6", user1);
 		Post post7 = new Post("Titulo 7", "Texto 7", user1);
 		Post post8 = new Post("Título post usuario 5", "Texto post usuario 5", user5);
+	
+		
 		postsService.addPost(post1);
 		postsService.addPost(post2);
 		postsService.addPost(post3);

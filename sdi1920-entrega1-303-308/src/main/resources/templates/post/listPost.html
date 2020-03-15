@@ -9,6 +9,10 @@
 		<p th:text="#{listPost.introduction}"></p>
 		<div class="panel panel-info" th:each="post : ${listPost}">
 			<div class="panel-heading" th:text="${post.title}"></div>
+			<div class="panel-body">
+				<img class="img-thumbnail" th:if="${post.hasPhoto()}" width="200" height="200"
+					th:src="@{'data:image/jpeg;base64,' + ${post.getBase64Image()}}" id="Panel_Image" />
+			</div>
 			<div class="panel-body" th:text="${post.date}"></div>
 			<div class="panel-body" th:text="${post.text}" th:if="${friend}"></div>
 		</div>
