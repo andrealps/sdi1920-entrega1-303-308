@@ -67,7 +67,7 @@ public class ListaPublicacionesTest {
 	 * 
 	 */
 	@Test
-	public void PR25() {
+	public void PR26() {
 		// Vamos al formulario de login
 		PO_HomeView.clickOption(driver, "login", "class", "btn btn-primary");
 		// Iniciamos sesión con un usuario registrado
@@ -79,11 +79,11 @@ public class ListaPublicacionesTest {
 		elementos = PO_View.checkElement(driver, "free", "//a[contains(@href, 'post/listPost')]");
 		elementos.get(0).click();
 		// Comprobar que hay 7 publicaciones
-		elementos = SeleniumUtils.EsperaCargaPagina(driver, "class", "panel-default", PO_View.getTimeout());
+		elementos = SeleniumUtils.EsperaCargaPagina(driver, "class", "panel-info", PO_View.getTimeout());
 		assertTrue(elementos.size() == 5);
 		elementos = PO_View.checkElement(driver, "free", "//a[contains(@class, 'page-link')]");
 		elementos.get(2).click();
-		elementos = SeleniumUtils.EsperaCargaPagina(driver, "class", "panel-default", PO_View.getTimeout());
+		elementos = SeleniumUtils.EsperaCargaPagina(driver, "class", "panel-info", PO_View.getTimeout());
 		assertTrue(elementos.size() == 2);
 	}
 }

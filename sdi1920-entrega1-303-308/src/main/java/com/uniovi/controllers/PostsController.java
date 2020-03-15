@@ -64,6 +64,7 @@ public class PostsController {
 
 		model.addAttribute("listPost", posts.getContent());
 		model.addAttribute("page", posts);
+		model.addAttribute("friend", false);
 		return "post/listPost";
 	}
 
@@ -75,12 +76,13 @@ public class PostsController {
 
 		User friend = usersService.getUserByEmail(friendEmail);
 		if (!user.getFriends().stream().map(x -> x.getUser2()).collect(Collectors.toList()).contains(friend)
-				&& !user.getFriendOf().stream().map(x -> x.getUser2()).collect(Collectors.toList()).contains(friend))
+				&& !user.getFriendOf().stream().map(x -> x.getUser1()).collect(Collectors.toList()).contains(friend))
 			return "redirect:/user/listFriends";
 		
 		posts = postsService.getPostsForUser(pageable, friend);
 		model.addAttribute("listPost", posts.getContent());
 		model.addAttribute("page", posts);
+		model.addAttribute("friend", true);
 		return "post/listPost";
 	}
 }

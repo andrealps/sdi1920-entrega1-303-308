@@ -7,13 +7,11 @@
 	<div class="container">
 		<h2 th:text="#{listPost.message}"></h2>
 		<p th:text="#{listPost.introduction}"></p>
-
-		<div class="panel panel-default" th:each="post : ${listPost}">
+		<div class="panel panel-info" th:each="post : ${listPost}">
 			<div class="panel-heading" th:text="${post.title}"></div>
-			<div class="panel-body" th:text="${post.text}"></div>
+			<div class="panel-body" th:text="${post.date}"></div>
+			<div class="panel-body" th:text="${post.text}" th:if="${friend}"></div>
 		</div>
-		
-	</div>
 	</div>
 	<footer th:replace="fragments/pagination" />
 </body>
