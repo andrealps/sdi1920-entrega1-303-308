@@ -71,5 +71,11 @@ public class UsersService {
 		return usersRepository.findById(l).get();
 	}
 
+	public List<User> getUsers() {
+		List<User> users = new ArrayList<User>();
+		usersRepository.findAll().forEach(users::add);
+		return users;
+	}
+
 
 }

@@ -12,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -87,7 +88,7 @@ public class UsersController {
 		} else {
 			users = usersService.findUsers(pageable, activeUser);
 		}
-		
+
 		model.addAttribute("usersList", comprobarPeticiones(users.getContent(), activeUser, pageable));
 		model.addAttribute("page", users);
 		return "user/listUsers";
@@ -98,7 +99,7 @@ public class UsersController {
 
 		// Comprobar que no se le ha mandado peticion ya
 		Page<User> requestsSended = friendRequestService.findFriendRequestByUser(user, pageable);
-	
+
 		for (User u : users) {
 			if (requestsSended.getContent().contains(u)) {
 				u.setFriendRequestSended(true);
@@ -115,16 +116,24 @@ public class UsersController {
 
 		return new PageImpl<User>(users);
 	}
+
+	@RequestMapping("/admin/listUsers")
+	public String getListado(Model model, Principal principal) {
+
+		model.addAttribute("usersList", usersService.getUsers());
 	
-	
-	@RequestMapping("/admin/listUsersAdmin")
-	public String getListado(Model model, Pageable pageable, Principal principal) {
-		String email = principal.getName();
-		User activeUser = usersService.getUserByEmail(email);
-		
-		Page<User> users =  usersService.findUsers(pageable, activeUser);
-		model.addAttribute("usersList", users.getContent());
-		model.addAttribute("page", users);
-		return "admin/listUsersAdmin";
+		return "admin/listUsers";
+	}
+
+	@RequestMapping(value = "/admin/delete", method = RequestMethod.POST)
+	public String updateList(@RequestParam("userChecked") List<User> users, Model model) {
+
+		if (users != null) {
+			for (User u : users) {
+				usersService.deleteUser(u.getId());
+			}
+		}
+		model.addAttribute("usersList", usersService.getUsers());
+		return "admin :: tableUsers";
 	}
 }
