@@ -77,11 +77,38 @@ public class ListaPublicacionesAmigoTest {
 		// Esperamos a que aparezca la pestaña de lista de amigos
 		elementos = PO_View.checkElement(driver, "free", "//a[contains(@href, 'user/listFriends')]");
 		elementos.get(0).click();
-		// Comprobamos que estamos en la página de amigos mirando que se encuentre a la usuaria Andrea
+		// Comprobamos que estamos en la página de amigos mirando que se encuentre a la
+		// usuaria Andrea
 		SeleniumUtils.textoPresentePagina(driver, "Andrea");
 		// Accedemos a las publicaciones del usuario5
 		elementos = PO_View.checkElement(driver, "text", "Andrea");
 		elementos.get(0).click();
 		assertTrue(elementos.size() == 1);
+	}
+
+	/**
+	 * Prueba 28. Utilizando un acceso vía URL u otra alternativa, tratar de listar
+	 * las publicaciones de un usuario que no sea amigo del usuario identificado en
+	 * sesión. Comprobar que el sistema da un error de autorización.
+	 * 
+	 */
+	@Test
+	public void PR28() {
+		// Vamos al formulario de login
+		PO_HomeView.clickOption(driver, "login", "class", "btn btn-primary");
+		// Iniciamos sesión con un usuario registrado
+		PO_LoginView.fillForm(driver, "ejemplo4@gmail.com", "123456");
+		List<WebElement> elementos = PO_View.checkElement(driver, "free", "//li[contains(@id, 'friends-menu')]/a");
+		elementos.get(0).click();
+		// Esperamos a que aparezca la pestaña de lista de amigos
+		elementos = PO_View.checkElement(driver, "free", "//a[contains(@href, 'user/listFriends')]");
+		elementos.get(0).click();
+		// Comprobamos que estamos en la página de amigos mirando que se encuentre a la
+		// usuaria Andrea
+		SeleniumUtils.textoPresentePagina(driver, "Andrea");
+		// Intentamos acceder a las publicaciones del usuario2 (no es amigo del usuario 5)
+		driver.navigate().to("http://localhost:8090/post/listPost/ejemplo4@gmail.com");
+		// Comprobamos que nos redirige a la pestaña de mis amigos
+		SeleniumUtils.textoPresentePagina(driver, "Andrea");
 	}
 }
