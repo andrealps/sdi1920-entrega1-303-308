@@ -1,5 +1,6 @@
 package com.uniovi.controllers;
 
+import java.io.IOException;
 import java.security.Principal;
 import java.util.LinkedList;
 import java.util.stream.Collectors;
@@ -12,7 +13,10 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
+import com.uniovi.entities.Photo;
 import com.uniovi.entities.Post;
 import com.uniovi.entities.User;
 import com.uniovi.services.PostsService;
@@ -41,15 +45,26 @@ public class PostsController {
 	}
 
 	@RequestMapping(value = "/post/addPost", method = RequestMethod.POST)
-	public String setPost(@Validated Post post, Principal principal, BindingResult result) {
+	public String setPost(@Validated Post post, Principal principal, BindingResult result,
+			@RequestParam(value = "file", required = false) MultipartFile file) throws IOException {
 		addPostFormValidator.validate(post, result);
 		if (result.hasErrors()) {
 			return "/post/addPost";
 		}
 		String email = principal.getName(); // email es el name de la autenticación
 		User user = usersService.getUserByEmail(email);
+
 		post.setUser(user);
+
+		if (!file.isEmpty()) {
+			byte[] pixel = file.getBytes();
+
+			Photo photo = new Photo(pixel);
+			post.setPhoto(photo);
+		}
+
 		user.getListPost().add(post);
+
 		postsService.addPost(post);
 		return "redirect:/post/listPost";
 	}
@@ -64,23 +79,26 @@ public class PostsController {
 
 		model.addAttribute("listPost", posts.getContent());
 		model.addAttribute("page", posts);
+		model.addAttribute("friend", false);
 		return "post/listPost";
 	}
 
 	@RequestMapping("/post/listPost/{friendEmail}")
-	public String getPostListFriend(Model model, Pageable pageable, Principal principal, @PathVariable String friendEmail) {
+	public String getPostListFriend(Model model, Pageable pageable, Principal principal,
+			@PathVariable String friendEmail) {
 		String email = principal.getName(); // email es el name de la autenticación
 		User user = usersService.getUserByEmail(email);
 		Page<Post> posts = new PageImpl<Post>(new LinkedList<Post>());
 
 		User friend = usersService.getUserByEmail(friendEmail);
 		if (!user.getFriends().stream().map(x -> x.getUser2()).collect(Collectors.toList()).contains(friend)
-				&& !user.getFriendOf().stream().map(x -> x.getUser2()).collect(Collectors.toList()).contains(friend))
+				&& !user.getFriendOf().stream().map(x -> x.getUser1()).collect(Collectors.toList()).contains(friend))
 			return "redirect:/user/listFriends";
-		
+
 		posts = postsService.getPostsForUser(pageable, friend);
 		model.addAttribute("listPost", posts.getContent());
 		model.addAttribute("page", posts);
+		model.addAttribute("friend", true);
 		return "post/listPost";
 	}
 }

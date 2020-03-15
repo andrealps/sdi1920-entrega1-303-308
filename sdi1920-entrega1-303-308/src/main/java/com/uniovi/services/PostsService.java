@@ -7,8 +7,10 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import com.uniovi.entities.Photo;
 import com.uniovi.entities.Post;
 import com.uniovi.entities.User;
+import com.uniovi.repositories.PhotoRepository;
 import com.uniovi.repositories.PostsRepository;
 
 @Service
@@ -16,6 +18,10 @@ public class PostsService {
 
 	@Autowired
 	private PostsRepository postsRepository;
+	
+	@Autowired
+	private PhotoRepository photosRepository;
+	
 
 	// Comentar si no se crean las tablas de nuevo
 	@PostConstruct
@@ -50,5 +56,12 @@ public class PostsService {
 	public Page<Post> getPostsForUser(Pageable pageable, User user) {
 		return postsRepository.findByUser(pageable, user);
 	}
+	
+	public void addPhoto(Photo photo) {
+		photosRepository.save(photo);
+	}
 
+	public Photo getPhotoById(Long id) {
+		return photosRepository.findById(id).get();
+	}
 }

@@ -4,6 +4,8 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
+import com.uniovi.util.UtilMethods;
+
 public class PO_PostsView extends PO_NavView {
 
 	static public void fillForm(WebDriver driver, String titlep, String textp) {
@@ -22,5 +24,11 @@ public class PO_PostsView extends PO_NavView {
 		By boton = By.className("btn");
 		driver.findElement(boton).click();
 	}
+	
+	static public void fillForm(WebDriver driver, String titlep, String textp, String photoUrl) {
+		WebElement photo = driver.findElement(By.name("file"));
+		photo.sendKeys(UtilMethods.getAbsolutePath(photoUrl));
 
+		fillForm(driver, titlep, textp);
+	}
 }
