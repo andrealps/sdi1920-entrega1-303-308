@@ -8,7 +8,6 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import com.uniovi.tests.pageobjects.PO_HomeView;
 import com.uniovi.tests.pageobjects.PO_LoginView;
 import com.uniovi.tests.pageobjects.PO_Properties;
-import com.uniovi.tests.pageobjects.PO_RegisterView;
 
 //Ordenamos las pruebas por el nombre del método 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
@@ -64,7 +63,7 @@ public class LoginTest {
 		// Rellenamos el formulario.
 		PO_LoginView.fillForm(driver, "admin@email.com", "admin");
 		// Comprobamos que iniciamos sesión
-		PO_RegisterView.checkKey(driver, "welcome.message", PO_Properties.getSPANISH());
+		PO_HomeView.checkKey(driver, "welcome.message", PO_Properties.getSPANISH());
 	}
 	
 	/**
@@ -77,7 +76,7 @@ public class LoginTest {
 		// Rellenamos el formulario.
 		PO_LoginView.fillForm(driver, "ejemplo1@gmail.com", "123456");
 		// Comprobamos que iniciamos sesión
-		PO_RegisterView.checkKey(driver, "welcome.message", PO_Properties.getSPANISH());
+		PO_LoginView.checkKey(driver, "welcome.message", PO_Properties.getSPANISH());
 	}
 	
 	/**
@@ -90,7 +89,7 @@ public class LoginTest {
 		// Rellenamos el formulario.
 		PO_LoginView.fillForm(driver, "", "");
 		// Comprobamos que no iniciamos sesión
-		PO_RegisterView.checkKey(driver, "login.message", PO_Properties.getSPANISH());
+		PO_LoginView.checkKey(driver, "login.message", PO_Properties.getSPANISH());
 	}
 	
 	/**
@@ -103,7 +102,7 @@ public class LoginTest {
 		// Rellenamos el formulario.
 		PO_LoginView.fillForm(driver, "ejemplo1@gmail.com", "aaaaa");
 		// Comprobamos que no iniciamos sesión (se muestra mensaje de error)
-		PO_RegisterView.checkKey(driver, "login.message", PO_Properties.getSPANISH());
-		PO_RegisterView.checkKey(driver, "login.error.message", PO_Properties.getSPANISH());
+		PO_LoginView.checkKey(driver, "login.message", PO_Properties.getSPANISH());
+		PO_LoginView.checkKey(driver, "login.error.message", PO_Properties.getSPANISH());
 	}
 }

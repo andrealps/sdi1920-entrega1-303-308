@@ -138,4 +138,20 @@ public class User {
 	public void setListPost(Set<Post> listPost) {
 		this.listPost = listPost;
 	}
+
+	public Set<Friendship> getFriends() {
+		return friends;
+	}
+
+	public void setFriends(Set<Friendship> friends) {
+		this.friends = friends;
+	}
+
+	public Set<Friendship> getFriendOf() {
+		return friendOf;
+	}
+
+	public void setFriendOf(Set<Friendship> friendOf) {
+		this.friendOf = friendOf;
+	}
 }
