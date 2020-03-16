@@ -126,11 +126,11 @@ public class UsersController {
 	}
 
 	@RequestMapping(value = "/admin/delete", method = RequestMethod.POST)
-	public String updateList(@RequestParam("userChecked") List<User> users, Model model) {
+	public String updateList(@RequestParam("idChecked") List<Long> users, Model model) {
 
 		if (users != null) {
-			for (User u : users) {
-				usersService.deleteUser(u.getId());
+			for (Long u : users) {
+				usersService.deleteUserFromBD(u);
 			}
 		}
 		model.addAttribute("usersList", usersService.getUsers());

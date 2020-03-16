@@ -9,6 +9,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import com.uniovi.entities.User;
+import com.uniovi.repositories.PostsRepository;
 import com.uniovi.repositories.UsersRepository;
 
 @Service
@@ -75,6 +76,11 @@ public class UsersService {
 		List<User> users = new ArrayList<User>();
 		usersRepository.findAll().forEach(users::add);
 		return users;
+	}
+
+	public void deleteUserFromBD(Long u) {
+		
+		
 	}
 
 
