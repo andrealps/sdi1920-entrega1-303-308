@@ -77,7 +77,7 @@ public class InsertSampleDataService {
 		Post post6 = new Post("Titulo 6", "Texto 6", user1);
 		Post post7 = new Post("Titulo 7", "Texto 7", user1);
 		Post post8 = new Post("Título post usuario 5", "Texto post usuario 5", user5);
-        //post8.setPhoto(new Photo(UtilMethods.getImageContent("static/img/prueba.jpg")));
+        //post8.setPhoto(new Photo(UtilMethods.getImageContent("static/img/IMG_1666.jpg")));
 
 		postsService.addPost(post1);
 		postsService.addPost(post2);
