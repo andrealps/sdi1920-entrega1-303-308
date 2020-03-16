@@ -7,6 +7,7 @@ html {
 body {
 	/* Margin bottom by footer height */
 	margin-bottom: 60px;
+	font-family: "Century Gothic", CenturyGothic, AppleGothic, sans-serif;
 }
 
 
@@ -18,5 +19,14 @@ footer {
 	background-color: #101010;
 	text-align: center;
 	line-height: 60px
+}
+
+a {
+	font-size: 1.2em;
+}
+
+.logoApp {
+	height: 48px;
+	width: 48px;
 }
 /* Sticky footer styles-------------------------------------------------- */
