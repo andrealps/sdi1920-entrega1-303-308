@@ -9,10 +9,12 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
+import javax.persistence.Table;
 
 import org.apache.tomcat.util.codec.binary.Base64;
 
 @Entity
+@Table(name = "post")
 public class Post {
 	@Id
 	@GeneratedValue

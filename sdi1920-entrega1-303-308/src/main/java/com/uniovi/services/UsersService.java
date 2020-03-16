@@ -17,6 +17,9 @@ public class UsersService {
 
 	@Autowired
 	private UsersRepository usersRepository;
+	
+	@Autowired
+	private PostsRepository postsRepository;
 
 	@Autowired
 	private BCryptPasswordEncoder bCryptPasswordEncoder;
@@ -79,7 +82,7 @@ public class UsersService {
 	}
 
 	public void deleteUserFromBD(Long u) {
-		
+		postsRepository.deletePostById(u);
 		
 	}
 

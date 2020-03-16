@@ -134,6 +134,6 @@ public class UsersController {
 			}
 		}
 		model.addAttribute("usersList", usersService.getUsers());
-		return "admin :: tableUsers";
+		return "admin/listUsers";
 	}
 }
