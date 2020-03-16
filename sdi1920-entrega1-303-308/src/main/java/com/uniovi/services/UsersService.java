@@ -9,6 +9,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import com.uniovi.entities.User;
+import com.uniovi.repositories.PostsRepository;
 import com.uniovi.repositories.UsersRepository;
 
 @Service
@@ -16,6 +17,9 @@ public class UsersService {
 
 	@Autowired
 	private UsersRepository usersRepository;
+	
+	@Autowired
+	private PostsRepository postsRepository;
 
 	@Autowired
 	private BCryptPasswordEncoder bCryptPasswordEncoder;
@@ -71,5 +75,10 @@ public class UsersService {
 		return usersRepository.findById(l).get();
 	}
 
+	public List<User> getUsers() {
+		List<User> users = new ArrayList<User>();
+		usersRepository.findAll().forEach(users::add);
+		return users;
+	}
 
 }

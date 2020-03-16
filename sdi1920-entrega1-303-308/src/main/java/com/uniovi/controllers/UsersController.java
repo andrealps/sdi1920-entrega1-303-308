@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.uniovi.entities.User;
 import com.uniovi.services.FriendRequestService;
 import com.uniovi.services.FriendshipService;
+import com.uniovi.services.PostsService;
 import com.uniovi.services.RolesService;
 import com.uniovi.services.SecurityService;
 import com.uniovi.services.UsersService;
@@ -38,6 +39,9 @@ public class UsersController {
 
 	@Autowired
 	private FriendshipService friendshipService;
+	
+	@Autowired
+	private PostsService postsService;
 
 	@Autowired
 	private SecurityService securityService;
@@ -87,7 +91,7 @@ public class UsersController {
 		} else {
 			users = usersService.findUsers(pageable, activeUser);
 		}
-		
+
 		model.addAttribute("usersList", comprobarPeticiones(users.getContent(), activeUser, pageable));
 		model.addAttribute("page", users);
 		return "user/listUsers";
@@ -98,7 +102,7 @@ public class UsersController {
 
 		// Comprobar que no se le ha mandado peticion ya
 		Page<User> requestsSended = friendRequestService.findFriendRequestByUser(user, pageable);
-	
+
 		for (User u : users) {
 			if (requestsSended.getContent().contains(u)) {
 				u.setFriendRequestSended(true);
@@ -115,16 +119,27 @@ public class UsersController {
 
 		return new PageImpl<User>(users);
 	}
+
+	@RequestMapping("/admin/listUsers")
+	public String getListado(Model model, Principal principal) {
+
+		model.addAttribute("usersList", usersService.getUsers());
 	
-	
-	@RequestMapping("/admin/listUsersAdmin")
-	public String getListado(Model model, Pageable pageable, Principal principal) {
-		String email = principal.getName();
-		User activeUser = usersService.getUserByEmail(email);
-		
-		Page<User> users =  usersService.findUsers(pageable, activeUser);
-		model.addAttribute("usersList", users.getContent());
-		model.addAttribute("page", users);
-		return "admin/listUsersAdmin";
+		return "admin/listUsers";
+	}
+
+	@RequestMapping(value = "/admin/delete", method = RequestMethod.POST)
+	public String updateList(@RequestParam("idChecked") List<Long> users, Model model) {
+
+		if (users != null) {
+			for (Long u : users) {
+				postsService.deletePostByUser(u);
+				friendshipService.deleteFriendship(u);
+				friendRequestService.deleteFriendRequest(u);
+				usersService.deleteUser(u);
+			}
+		}
+		model.addAttribute("usersList", usersService.getUsers());
+		return "admin/listUsers";
 	}
 }

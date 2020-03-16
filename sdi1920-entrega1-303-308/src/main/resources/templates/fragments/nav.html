@@ -13,7 +13,7 @@
 			<ul class="nav navbar-nav" sec:authorize="isAuthenticated()">
 				<li><a href="/">Home</a></li>
 				<li id="admin-menu" sec:authorize="hasRole('ROLE_ADMIN')"><a
-					href="/admin/listUsersAdmin" th:text="#{listUser.message}"></a></li>
+					href="/admin/listUsers" th:text="#{listUser.message}"></a></li>
 				<li id="users-menu" sec:authorize="hasRole('ROLE_STANDARD')"><a
 					href="/user/listUsers" th:text="#{listUser.message}"></a></li>
 				<li id="friends-menu" sec:authorize="hasRole('ROLE_STANDARD')"

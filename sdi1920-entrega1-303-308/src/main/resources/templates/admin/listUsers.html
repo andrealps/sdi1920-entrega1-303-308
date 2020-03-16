@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head th:replace="fragments/head" />
+<body>
+	<!-- Barra de Navegación superior -->
+	<nav th:replace="fragments/nav" />
+	<div class="container">
+		<h2 th:text="#{listUser.message}"></h2>
+		<p th:text="#{listUser.introduction}"></p>
+
+		<form th:action='@{/admin/delete}' method="POST" th:object="${user}">
+
+			<button type=type= "submit" name='delete' value="delete"
+				class='btn btn-secondary btn-sm' th:text="#{admin.delete}"
+				data-toggle="tooltip" data-placement="right"
+				th:title="#{admin.delete}"></button>
+
+			
+			<div class="table-responsive">
+				<table class="table table-hover" th:fragment="tableUsers"
+					id="tableUsers">
+					<thead>
+						<tr>
+							<th th:text="#{name}"></th>
+							<th th:text="#{lastName}"></th>
+							<th th:text="#{email}"></th>
+					</thead>
+					<tbody>
+						<tr th:each="user : ${usersList}">
+							<td th:text="${user.name}"></td>
+							<td th:text="${user.lastName}"></td>
+							<td th:text="${user.email}"></td>
+							<td><input type="checkbox" th:name="idChecked" th:value="${user.id}" /></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			</form>
+	</div>
+	<footer th:replace="fragments/footer" />
+</body>
+</html>

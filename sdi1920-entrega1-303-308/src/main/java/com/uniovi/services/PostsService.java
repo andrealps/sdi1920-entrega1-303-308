@@ -64,4 +64,8 @@ public class PostsService {
 	public Photo getPhotoById(Long id) {
 		return photosRepository.findById(id).get();
 	}
+	
+	public void deletePostByUser(Long id) {
+		postsRepository.deletePostById(id);
+	}
 }

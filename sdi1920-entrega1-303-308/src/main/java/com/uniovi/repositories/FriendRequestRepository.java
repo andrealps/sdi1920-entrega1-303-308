@@ -1,7 +1,10 @@
 package com.uniovi.repositories;
 
+import javax.transaction.Transactional;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 
@@ -20,5 +23,10 @@ public interface FriendRequestRepository extends CrudRepository<FriendRequest, L
 	FriendRequest acceptFriendRequest(Long idUserFrom, Long idUserTo);
 	
 	Page<FriendRequest> findAll(Pageable pageable);
+
+	@Transactional
+	@Modifying
+	@Query("DELETE FROM FriendRequest fr WHERE (fr.pidePeticion.id = ?1 OR fr.recibePeticion.id = ?1)")
+	void deleteFriendRequest(Long id);
 }
 
