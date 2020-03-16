@@ -30,19 +30,21 @@ public class FriendRequestService {
 	}
 
 	// Aceptar peticion (ser borra la peticion de la bd)
-	public Page<User> acceptFriendRequest(User userFrom, User userTo,  Pageable pageable) {
+	public Page<User> acceptFriendRequest(User userFrom, User userTo, Pageable pageable) {
 		FriendRequest request = friendRequestRepository.acceptFriendRequest(userFrom.getId(), userTo.getId());
 		friendRequestRepository.delete(request);
-		
+
 		// Comprobar si hay peticion a la inversa
 		Page<User> peticionesEnviadas = findFriendRequestByUser(userTo, pageable);
-//		for(User u : peticionesEnviadas) {
-			if(peticionesEnviadas.getContent().contains(userFrom)) {
-				FriendRequest f = friendRequestRepository.acceptFriendRequest(userTo.getId(), userFrom.getId());
-				friendRequestRepository.delete(f);
-			}
-//		}
+		if (peticionesEnviadas.getContent().contains(userFrom)) {
+			FriendRequest f = friendRequestRepository.acceptFriendRequest(userTo.getId(), userFrom.getId());
+			friendRequestRepository.delete(f);
+		}
 		return friendRequestRepository.findFriendRequestByUser(userTo.getId(), pageable);
+	}
+	
+	public void deleteFriendRequest(Long id) {
+		friendRequestRepository.deleteFriendRequest(id);
 	}
 
 }

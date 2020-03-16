@@ -47,5 +47,9 @@ public class FriendshipService {
 		}
 		return false;
 	}
+	
+	public void deleteFriendship(Long id) {
+		friendshipRepository.deleteFriendShip(id);
+	}
 
 }

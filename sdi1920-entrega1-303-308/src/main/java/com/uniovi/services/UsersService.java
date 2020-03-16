@@ -81,10 +81,4 @@ public class UsersService {
 		return users;
 	}
 
-	public void deleteUserFromBD(Long u) {
-		postsRepository.deletePostById(u);
-		
-	}
-
-
 }

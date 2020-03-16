@@ -12,7 +12,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -20,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.uniovi.entities.User;
 import com.uniovi.services.FriendRequestService;
 import com.uniovi.services.FriendshipService;
+import com.uniovi.services.PostsService;
 import com.uniovi.services.RolesService;
 import com.uniovi.services.SecurityService;
 import com.uniovi.services.UsersService;
@@ -39,6 +39,9 @@ public class UsersController {
 
 	@Autowired
 	private FriendshipService friendshipService;
+	
+	@Autowired
+	private PostsService postsService;
 
 	@Autowired
 	private SecurityService securityService;
@@ -130,7 +133,10 @@ public class UsersController {
 
 		if (users != null) {
 			for (Long u : users) {
-				usersService.deleteUserFromBD(u);
+				postsService.deletePostByUser(u);
+				friendshipService.deleteFriendship(u);
+				friendRequestService.deleteFriendRequest(u);
+				usersService.deleteUser(u);
 			}
 		}
 		model.addAttribute("usersList", usersService.getUsers());
