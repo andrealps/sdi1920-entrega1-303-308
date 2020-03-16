@@ -67,14 +67,13 @@ public class ListaUsuariosTest {
 	// Al finalizar la última prueba
 	@AfterClass
 	static public void end() {
-		// Cerramos el navegador al finalizar las pruebas 
-		driver.quit();
+		// Cerramos el navegador al finalizar las pruebas
+		//driver.quit();
 	}
 
 	/**
-	 * [Prueba12]
-	 * Hacer una búsqueda con el campo vacío y comprobar que se muestra la página
-	 * que corresponde con el listado usuarios existentes en el sistema.
+	 * [Prueba12] Hacer una búsqueda con el campo vacío y comprobar que se muestra
+	 * la página que corresponde con el listado usuarios existentes en el sistema.
 	 */
 	@Test
 	public void PR12() {
@@ -93,17 +92,21 @@ public class ListaUsuariosTest {
 		// Se cargan todos los usuarios
 		elementos = SeleniumUtils.EsperaCargaPagina(driver, "free", "//tbody/tr", PO_View.getTimeout());
 		assertTrue(elementos.size() == 5);
+		// Nos vamos a la siguiente página
+		elementos = PO_View.checkElement(driver, "free", "//a[contains(@class, 'page-link')]");
+		elementos.get(2).click();
+		elementos = SeleniumUtils.EsperaCargaPagina(driver, "free", "//tbody/tr", PO_View.getTimeout());
+		assertTrue(elementos.size() == 1);
 		// Nos desconectamos
 		PO_HomeView.clickOption(driver, "logout", "text", "Email");
 	}
 
-	 /**
-	  * [Prueba13]
-	  * Hacer una búsqueda escribiendo en el campo un texto que no exista y
-	  *	comprobar que se muestra la página que corresponde, con la lista de usuarios
-	  * vacía.
-	  */
-	
+	/**
+	 * [Prueba13] Hacer una búsqueda escribiendo en el campo un texto que no exista
+	 * y comprobar que se muestra la página que corresponde, con la lista de
+	 * usuarios vacía.
+	 */
+
 	@Test
 	public void PR13() {
 		// Nos logueamos
@@ -125,11 +128,9 @@ public class ListaUsuariosTest {
 	}
 
 	/**
-	 * [Prueba14]
-	 * Hacer una búsqueda con un texto específico y comprobar que se muestra la
-	 * página que corresponde,
-	 * con la lista de usuarios en los que el texto especificados sea parte de su
-	 * nombre, apellidos o de su email.
+	 * [Prueba14] Hacer una búsqueda con un texto específico y comprobar que se
+	 * muestra la página que corresponde, con la lista de usuarios en los que el
+	 * texto especificados sea parte de su nombre, apellidos o de su email.
 	 */
 	@Test
 	public void PR14() {

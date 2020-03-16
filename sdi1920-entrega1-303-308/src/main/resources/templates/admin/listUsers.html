@@ -30,7 +30,7 @@
 							<td th:text="${user.name}"></td>
 							<td th:text="${user.lastName}"></td>
 							<td th:text="${user.email}"></td>
-							<td><input type="checkbox" th:name="idChecked" th:value="${user.id}" /></td>
+							<td><input type="checkbox" id="${user.name}" th:name="idChecked" th:value="${user.id}" /></td>
 						</tr>
 					</tbody>
 				</table>
